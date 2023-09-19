@@ -22,82 +22,6 @@ namespace KTMSApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Createdby")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EventStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EventTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("GuidId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventStatusId");
-
-                    b.HasIndex("EventTypeId");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EventStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EventStatuses");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EventType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EventTypes");
-                });
-
             modelBuilder.Entity("Domain.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -196,21 +120,6 @@ namespace KTMSApi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Event", b =>
-                {
-                    b.HasOne("Domain.Entities.EventStatus", "EventStatus")
-                        .WithMany("Events")
-                        .HasForeignKey("EventStatusId");
-
-                    b.HasOne("Domain.Entities.EventType", "EventType")
-                        .WithMany("Events")
-                        .HasForeignKey("EventTypeId");
-
-                    b.Navigation("EventStatus");
-
-                    b.Navigation("EventType");
-                });
-
             modelBuilder.Entity("Domain.Entities.TokenModel", b =>
                 {
                     b.HasOne("Domain.Entities.UserModel", "User")
@@ -239,16 +148,6 @@ namespace KTMSApi.Migrations
                     b.Navigation("Person");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EventStatus", b =>
-                {
-                    b.Navigation("Events");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EventType", b =>
-                {
-                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserModel", b =>

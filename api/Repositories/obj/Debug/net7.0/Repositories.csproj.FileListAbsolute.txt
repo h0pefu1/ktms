@@ -17,3 +17,5 @@
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/obj/Debug/net7.0/refint/Repositories.dll
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/obj/Debug/net7.0/Repositories.pdb
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/obj/Debug/net7.0/ref/Repositories.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/bin/Debug/net7.0/DTO.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/bin/Debug/net7.0/DTO.pdb

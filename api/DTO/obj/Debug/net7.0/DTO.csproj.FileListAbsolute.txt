@@ -1,0 +1,12 @@
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/bin/Debug/net7.0/DTO.deps.json
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/bin/Debug/net7.0/DTO.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/bin/Debug/net7.0/DTO.pdb
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.csproj.AssemblyReference.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.GeneratedMSBuildEditorConfig.editorconfig
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.AssemblyInfoInputs.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.AssemblyInfo.cs
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.csproj.CoreCompileInputs.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/refint/DTO.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.pdb
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/ref/DTO.dll

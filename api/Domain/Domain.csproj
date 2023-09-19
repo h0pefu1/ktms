@@ -24,4 +24,14 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Entities\Meeting\" />
+    <None Remove="Entities\Teams\" />
+    <None Remove="Entities\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Meeting\" />
+    <Folder Include="Entities\Teams\" />
+    <Folder Include="Entities\User\" />
+  </ItemGroup>
 </Project>

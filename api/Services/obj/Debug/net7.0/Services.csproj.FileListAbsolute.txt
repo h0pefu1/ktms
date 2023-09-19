@@ -1,0 +1,12 @@
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/bin/Debug/net7.0/Services.deps.json
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/bin/Debug/net7.0/Services.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/bin/Debug/net7.0/Services.pdb
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.csproj.AssemblyReference.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.AssemblyInfoInputs.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.AssemblyInfo.cs
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.csproj.CoreCompileInputs.cache
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/refint/Services.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/Services.pdb
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/Debug/net7.0/ref/Services.dll

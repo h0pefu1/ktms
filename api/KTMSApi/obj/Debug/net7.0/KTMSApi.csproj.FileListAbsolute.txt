@@ -254,3 +254,7 @@ D:/ReactKTMSAll/BackEndApi.Net/KTMSApi/obj/Debug/net7.0/ref/KTMSApi.dll
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/obj/Debug/net7.0/KTMSApi.csproj.CopyComplete
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/obj/Debug/net7.0/KTMSApi.genruntimeconfig.cache
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/obj/Debug/net7.0/ref/KTMSApi.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/bin/Debug/net7.0/DTO.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/bin/Debug/net7.0/Services.dll
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/bin/Debug/net7.0/DTO.pdb
+/Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/bin/Debug/net7.0/Services.pdb

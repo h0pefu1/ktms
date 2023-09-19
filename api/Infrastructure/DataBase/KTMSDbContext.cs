@@ -21,11 +21,8 @@ namespace MFC.Infrastructure.DataBase
 
         }
 
-        public virtual  DbSet<Event> Events { get; set; }
         public virtual DbSet<UserModel> Users { get; set; }
         public virtual DbSet<TokenModel> Tokens { get; set; }
-        public virtual DbSet<EventStatus> EventStatuses{ get; set; }
-        public virtual DbSet<EventType> EventTypes { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
 

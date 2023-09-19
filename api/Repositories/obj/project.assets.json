@@ -1079,6 +1079,16 @@
           "bin/placeholder/Domain.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
+        }
+      },
       "Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3308,6 +3318,11 @@
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
     "Infrastructure/1.0.0": {
       "type": "project",
       "path": "../Infrastructure/Infrastructure.csproj",
@@ -3321,6 +3336,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "DTO >= 1.0.0",
       "Domain >= 1.0.0",
       "Infrastructure >= 1.0.0",
       "Security >= 1.0.0"
@@ -3353,6 +3369,9 @@
           "projectReferences": {
             "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj": {
               "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj"
+            },
+            "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj": {
+              "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj"
             },
             "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
               "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj"

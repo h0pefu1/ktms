@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "Repositories/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
           "Security": "1.0.0"
@@ -584,6 +585,11 @@
           "Domain.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "runtime": {
+          "DTO.dll": {}
+        }
+      },
       "Infrastructure/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
@@ -1058,6 +1064,11 @@
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
     },
     "Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DTO/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -12,6 +12,9 @@ using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.IRepositories;
 using Infrastructure.Repositories;
+using Infrastructure.DataBase;
+using Repositories.Repositories;
+using Repositories.IRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -31,9 +34,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KTMSDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("KTMSApi")
+
+   ));
+builder.Services.AddDbContext<DashboardDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("KTMSApi")
+
    ));
 #region Dependencies
-builder.Services.AddTransient<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IMeetingRepository, MeetingRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITokenRepository, TokenRepository>();
@@ -79,12 +86,6 @@ app.UseCors();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<ChatHub>("/chat");
-    endpoints.MapHub<VideoHub>("/video");
-}
-);
 app.MapControllers();
 app.UseHttpsRedirection();
 

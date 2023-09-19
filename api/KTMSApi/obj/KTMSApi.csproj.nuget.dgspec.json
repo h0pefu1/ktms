@@ -99,6 +99,59 @@
         }
       }
     },
+    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj",
+        "projectName": "DTO",
+        "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj",
+        "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
+        "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -221,14 +274,17 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
-                "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj"
+              "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj": {
+                "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj"
               },
               "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/Repositories.csproj": {
                 "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Repositories/Repositories.csproj"
               },
               "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Security/Security.csproj": {
                 "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Security/Security.csproj"
+              },
+              "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj": {
+                "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj"
               }
             }
           }
@@ -344,6 +400,9 @@
               "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj": {
                 "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj"
               },
+              "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj": {
+                "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj"
+              },
               "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
                 "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj"
               },
@@ -411,6 +470,59 @@
                 "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj"
               }
             }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj",
+        "projectName": "Services",
+        "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj",
+        "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
+        "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
           }
         },
         "warningProperties": {
