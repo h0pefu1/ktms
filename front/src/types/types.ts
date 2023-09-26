@@ -21,3 +21,10 @@ export interface IUser{
     person?: IPerson,
     isAuth?:boolean
 }
+
+export type Meeting = {
+    status:string,
+    team:string,
+    datePlanned:Date,
+
+}

@@ -1,33 +1,19 @@
 ﻿<Properties StartupConfiguration="{66AF8CB2-AB88-40F9-A14A-BA8B22F3417E}|https">
   <MonoDevelop.Ide.ItemProperties.KTMSApi PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="KTMSApi/Program.cs">
+    <Files>
+      <File FileName="KTMSApi/Program.cs" Line="93" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="KTMSApi">
-            <Node name="Domain">
-              <Node name="Entities" expanded="True">
-                <Node name="Meeting" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="DTO">
-              <Node name="Meeting" expanded="True" />
-            </Node>
-            <Node name="KTMSApi">
-              <Node name="appsettings.json" selected="True" />
-            </Node>
-          </Node>
-        </State>
+        <State name="__root__" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Repositories FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/maximlashchyonov/PetProjects/ktms/ktms/api/KTMSApi/Program.cs" relfile="KTMSApi/Program.cs" line="47" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
