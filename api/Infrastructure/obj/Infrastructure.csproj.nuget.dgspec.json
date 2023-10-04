@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {}
+    "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj": {
+    "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj",
+        "projectUniqueName": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj",
-        "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
-        "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/obj/",
+        "projectPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\romav\\.nuget\\packages\\",
+        "outputPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\romav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -95,34 +97,36 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
+    "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj",
+        "projectUniqueName": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj",
-        "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
-        "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/obj/",
+        "projectPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\romav\\.nuget\\packages\\",
+        "outputPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\romav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj": {
-                "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj"
+              "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj"
               }
             }
           }
@@ -194,7 +198,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
