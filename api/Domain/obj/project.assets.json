@@ -3546,24 +3546,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/maximlashchyonov/.nuget/packages/": {}
+    "C:\\Users\\romav\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj",
+      "projectUniqueName": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj",
-      "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
-      "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/obj/",
+      "projectPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\romav\\.nuget\\packages\\",
+      "outputPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\romav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3639,7 +3641,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

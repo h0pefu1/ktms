@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj": {}
+    "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Services\\Services.csproj": {}
   },
   "projects": {
-    "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj": {
+    "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj",
+        "projectUniqueName": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/Services.csproj",
-        "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
-        "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Services/obj/",
+        "projectPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\romav\\.nuget\\packages\\",
+        "outputPath": "D:\\VisualStudioCode_projects\\ktms\\ktms\\api\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\romav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

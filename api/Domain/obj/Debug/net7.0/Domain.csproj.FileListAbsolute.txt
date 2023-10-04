@@ -40,3 +40,17 @@ D:/ReactKTMSAll/BackEndApi.Net/Domain/obj/Debug/net7.0/ref/Domain.dll
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/obj/Debug/net7.0/Domain.pdb
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/obj/Debug/net7.0/Domain.genruntimeconfig.cache
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/obj/Debug/net7.0/ref/Domain.dll
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\bin\Debug\net7.0\Domain.deps.json
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\bin\Debug\net7.0\Domain.runtimeconfig.json
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\bin\Debug\net7.0\Domain.dll
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\bin\Debug\net7.0\Domain.pdb
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.csproj.AssemblyReference.cache
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.AssemblyInfoInputs.cache
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.AssemblyInfo.cs
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.csproj.CoreCompileInputs.cache
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.dll
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\refint\Domain.dll
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.pdb
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\Domain.genruntimeconfig.cache
+D:\VisualStudioCode_projects\ktms\ktms\api\Domain\obj\Debug\net7.0\ref\Domain.dll
