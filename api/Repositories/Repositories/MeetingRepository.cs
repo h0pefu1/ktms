@@ -17,25 +17,31 @@ namespace Repositories.Repositories
         }
         public async Task<List<MeetingDTO>> GetMeetings()
         {
-            var ListOfTeams = new List<int>
-            {
-                1,
-                2,
-                3
-            };
-            var items =await  _dbContext.Meetings
-                .Include(m => m.MeetingType)
-                .Include(m => m.Team)
-                .Where(t => ListOfTeams.Contains(t.Team.Id))
-                .Select(m => new MeetingDTO()
-                {
-                    Team = m.Team.Name,
-                    Status = m.Id % 2 == 0 ? "Ongoing" : "Incoming",
-                    DatePlanned = m.DatePlanned,
-                }).ToListAsync();
+            var stackOfTeams = new Stack<int>(new[] { 1, 2, 3 });
 
-            return items;
+            var meetingDTOs = new List<MeetingDTO>();
+
+            while (stackOfTeams.Count > 0)
+            {
+                var teamId = stackOfTeams.Pop();
+
+                var items = await _dbContext.Meetings
+                    .Include(m => m.MeetingType)
+                    .Include(m => m.Team)
+                    .Where(t => t.Team.Id == teamId)
+                    .Select(m => new MeetingDTO()
+                    {
+                        Team = m.Team.Name,
+                        Status = m.Id % 2 == 0 ? "Ongoing" : "Incoming",
+                        DatePlanned = m.DatePlanned,
+                    }).ToListAsync();
+
+                meetingDTOs.AddRange(items);
+            }
+
+            return meetingDTOs;
         }
+
     }
 }
 

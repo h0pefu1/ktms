@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "903yBkNDmenom385fAIeaSJUP4ElwFmhsgQlh/E/AZA6iofRczkqkHLPM/BMhdFSC8R+Iqy5ICFN/+QodPKvxA==",
+  "dgSpecHash": "7DX6t/GTPTmEuaBzV7T8CF0SYD54zQWfBdG+1SBZRkR3aTMSA01QpIOabCsA57A3919o2L1Z0jSJiRT7MNJihw==",
   "success": true,
-  "projectFilePath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/DTO.csproj",
+  "projectFilePath": "D:\\STUDY\\KTMS\\api\\DTO\\DTO.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

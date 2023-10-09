@@ -3307,35 +3307,43 @@
     ]
   },
   "packageFolders": {
-    "/Users/maximlashchyonov/.nuget/packages/": {}
+    "C:\\Users\\Max\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Security/Security.csproj",
+      "projectUniqueName": "D:\\STUDY\\KTMS\\api\\Security\\Security.csproj",
       "projectName": "Security",
-      "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Security/Security.csproj",
-      "packagesPath": "/Users/maximlashchyonov/.nuget/packages/",
-      "outputPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Security/obj/",
+      "projectPath": "D:\\STUDY\\KTMS\\api\\Security\\Security.csproj",
+      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
+      "outputPath": "D:\\STUDY\\KTMS\\api\\Security\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/maximlashchyonov/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj": {
-              "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Domain/Domain.csproj"
+            "D:\\STUDY\\KTMS\\api\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\STUDY\\KTMS\\api\\Domain\\Domain.csproj"
             },
-            "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj": {
-              "projectPath": "/Users/maximlashchyonov/PetProjects/ktms/ktms/api/Infrastructure/Infrastructure.csproj"
+            "D:\\STUDY\\KTMS\\api\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\STUDY\\KTMS\\api\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -3365,7 +3373,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
