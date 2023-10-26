@@ -14,34 +14,22 @@ import tableDataCheck from "./variables/tableDataCheck";
 import tableDataComplex from "./variables/tableDataComplex";
 import { v4 as uuid } from "uuid";
 import { Link } from "react-router-dom";
-const testdaTA = [
-  {
-    status:"Ongoing",
-    team:"FAIA",
-    userCounts: 3
-  },
-  {
-    status:"Upcoming",
-    team:"AMAP",
-    till:"15min",
-    userCounts: 0
-  },
-  {
-    status:"Upcoming",
-    team:"FAIA",
-    till:"10min",
-    userCounts: 0
-  },
-  {
-    status:"Upcoming",
-    team:"FAIA",
-    till:"5min",
-    userCounts: 0
-  }
+import { useEffect, useState } from "react";
+import ChangeService from "services/ChangesService";
 
-]
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  const [testdaTA,setData] = useState([]);
+
+
+  useEffect(()=>{
+    ChangeService.longPoll((result) => {
+      if (result) {
+        setData(result);
+      }
+    });
+  }, []);
   return (
     <div>
       {/* Card widget */}
@@ -49,6 +37,7 @@ const Dashboard = () => {
       <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
     
           {
+          testdaTA.length > 0 &&
             testdaTA.map((item,index)=>
               (
               <div onClick={()=>navigate(`/admin/room/${uuid()}`)}>
