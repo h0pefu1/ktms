@@ -1,6 +1,4 @@
-import CardMenu from "components/card/CardMenu";
-import Checkbox from "components/checkbox";
-import { MdDragIndicator, MdCheckCircle, MdBarChart, MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import Card from "components/card";
 
 const OngoingCard = () => {
