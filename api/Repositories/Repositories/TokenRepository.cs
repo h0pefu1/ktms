@@ -1,7 +1,9 @@
 ﻿using BCrypt.Net;
 using Domain.Entities;
 using Infrastructure.IRepositories;
-using MFC.Infrastructure.DataBase;
+
+using KTMS.Infrastructure.DataBase;
+
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -51,11 +53,11 @@ namespace Infrastructure.Repositories
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
+                ValidateAudience = false, 
                 ValidateIssuer = false,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")),
-                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+                ValidateLifetime = false 
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken securityToken;

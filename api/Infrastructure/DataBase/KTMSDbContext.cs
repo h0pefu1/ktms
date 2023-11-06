@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MFC.Infrastructure.DataBase
+namespace KTMS.Infrastructure.DataBase
 {
     public class KTMSDbContext : DbContext
     {

@@ -10,3 +10,15 @@
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/refint/DTO.dll
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/DTO.pdb
 /Users/maximlashchyonov/PetProjects/ktms/ktms/api/DTO/obj/Debug/net7.0/ref/DTO.dll
+D:\STUDY\KTMS\api\DTO\bin\Debug\net7.0\DTO.deps.json
+D:\STUDY\KTMS\api\DTO\bin\Debug\net7.0\DTO.dll
+D:\STUDY\KTMS\api\DTO\bin\Debug\net7.0\DTO.pdb
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.csproj.AssemblyReference.cache
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.GeneratedMSBuildEditorConfig.editorconfig
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.AssemblyInfoInputs.cache
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.AssemblyInfo.cs
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.csproj.CoreCompileInputs.cache
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.dll
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\refint\DTO.dll
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.pdb
+D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\ref\DTO.dll

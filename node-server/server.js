@@ -134,5 +134,5 @@ io.on('connection',socket=>{
 });
 
 server.listen(PORT,()=>{
-    console.log('Server started')
+    console.log('Server started',PORT)
 })

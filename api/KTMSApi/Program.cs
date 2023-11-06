@@ -1,7 +1,6 @@
 using Infrastructure.Security;
 using Infrastructure.Security.Tokens;
 using KTMSApi;
-using MFC.Infrastructure.DataBase;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +14,9 @@ using Infrastructure.Repositories;
 using Infrastructure.DataBase;
 using Repositories.Repositories;
 using Repositories.IRepositories;
+using KTMS.Infrastructure.DataBase;
+using Services.Providers;
+using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -45,6 +47,13 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITokenRepository, TokenRepository>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+
+builder.Services.AddSingleton<IDatabaseBackupProvider>(provider =>
+{
+    var backupDirectory = Directory.GetCurrentDirectory(); 
+    return new SqlServerDatabaseBackupProvider(configuration.GetConnectionString("DefaultConnection"), backupDirectory);
+});
+builder.Services.AddHostedService<DatabaseBackupService>();
 #endregion
 builder.Services.AddAuthentication(options =>
 {

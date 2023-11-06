@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
-using MFC.Infrastructure.DataBase;
+
+using KTMS.Infrastructure.DataBase;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;

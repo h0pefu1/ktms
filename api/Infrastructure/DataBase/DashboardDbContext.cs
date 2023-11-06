@@ -1,7 +1,6 @@
 ﻿using System;
 using Domain.Entities.Meeting;
 using Domain.Entities.Teams;
-using MFC.Infrastructure.DataBase;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataBase

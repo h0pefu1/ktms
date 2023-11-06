@@ -19,7 +19,7 @@ const options = {
     timeout:1000,
     transport:["websocket"]
 }
-const socket = io('http://192.168.100.4:3001/',options);
+const socket = io('http://localhost:3001/',options);
 
 console.log(socket);
 

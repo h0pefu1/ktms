@@ -25,12 +25,12 @@ export default function useWebRTC(roomID) {
 
   const options = {
     "force new connection": true,
-    reconnectionAttempts: "Infinity",
+    reconnectionAttempts: 50,
     timeout: 1000,
     transport: ["websocket"],
     userInfo: store.user,
   };
-  const socket = io("http://192.168.100.4:3001/", options);
+  const socket = io("http://localhost:3001/", options);
   const LocalVideo = useRef(null);
   const LocalStram = useRef(null);
   const addNewClient = useCallback(
@@ -173,22 +173,29 @@ export default function useWebRTC(roomID) {
   useEffect(() => {
     async function startCapture() {
       try {
-        localMediaStream.current = await navigator.mediaDevices.getUserMedia({
+        const constraints = {
           audio: true,
           video: {
             width: 1280,
             height: 720,
           },
-        });
+        };
+  
+        // Check if the user's device supports video
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const hasVideoDevice = devices.some((device) => device.kind === 'videoinput');
+  
+        if (!hasVideoDevice) {
+        
+          constraints.video = false;
+        }
+  
+        localMediaStream.current = await navigator.mediaDevices.getUserMedia(constraints);
+      } catch (e) {
+        console.log(e);
       }
-      catch (e) {
-        console.log(e)
-
-      }
-      if (
-        localMediaStream.current !== null &&
-        localMediaStream.current !== undefined
-      ) {
+  
+      if (localMediaStream.current !== null && localMediaStream.current !== undefined) {
         addNewClient(LOCAL_VIDEO, () => {
           const localVideoElement = peerMediaElements.current[LOCAL_VIDEO];
           if (localVideoElement) {
@@ -198,27 +205,32 @@ export default function useWebRTC(roomID) {
             console.log(LocalVideo.current);
           }
           const userInfo = {
-            login:"login",
-            person:{
-                firstName:"firstName",
-                lastName:"lastName",
-              }
-          } 
+            login: "login",
+            person: {
+              firstName: "firstName",
+              lastName: "lastName",
+            }
+          };
           console.log("Add", userInfo.target);
         });
       }
     }
+    const userInfo = {
+      login: "login",
+      person: {
+        firstName: "firstName",
+        lastName: "lastName",
+      }
+    };
     startCapture().then(() =>
       socket.emit(ACTIONS.JOIN, {
         room: roomID,
-        userInfo: store.user,
+        userInfo:userInfo,
       })
     );
+  
     return () => {
-      if (
-        localMediaStream.current !== null &&
-        localMediaStream.current !== undefined
-      ) {
+      if (localMediaStream.current !== null && localMediaStream.current !== undefined) {
         localMediaStream.current.getTracks().forEach((track) => track.stop());
         socket.emit(ACTIONS.LEAVE);
       }

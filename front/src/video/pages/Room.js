@@ -51,7 +51,7 @@ function Room() {
   const [webcam, setWebCam] = useState(true);
   const [screenShare, setScreenShare] = useState(false);
   const {user:store} = useSelector((state)=>state);
-  const { id: roomID } = useParams();
+  const { roomId: roomID } = useParams();
   const { clients, provideMediaRef, LocalVideo, clientsNames,startShareScreen } =
     useWebRTC(roomID);
 

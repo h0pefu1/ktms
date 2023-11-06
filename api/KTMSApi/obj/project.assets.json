@@ -1862,6 +1862,10 @@
       "Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Infrastructure": "1.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "2.2.0"
+        },
         "compile": {
           "bin/placeholder/Services.dll": {}
         },
