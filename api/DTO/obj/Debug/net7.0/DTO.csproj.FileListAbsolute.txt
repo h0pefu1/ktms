@@ -22,3 +22,14 @@ D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.dll
 D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\refint\DTO.dll
 D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\DTO.pdb
 D:\STUDY\KTMS\api\DTO\obj\Debug\net7.0\ref\DTO.dll
+C:\FunnyProjects\KTMS\api\DTO\bin\Debug\net7.0\DTO.deps.json
+C:\FunnyProjects\KTMS\api\DTO\bin\Debug\net7.0\DTO.dll
+C:\FunnyProjects\KTMS\api\DTO\bin\Debug\net7.0\DTO.pdb
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.AssemblyInfoInputs.cache
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.AssemblyInfo.cs
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.csproj.CoreCompileInputs.cache
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.dll
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\refint\DTO.dll
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\DTO.pdb
+C:\FunnyProjects\KTMS\api\DTO\obj\Debug\net7.0\ref\DTO.dll
