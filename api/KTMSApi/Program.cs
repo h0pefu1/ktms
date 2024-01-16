@@ -44,12 +44,12 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ITokenRepository, TokenRepository>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 
-builder.Services.AddSingleton<IDatabaseBackupProvider>(provider =>
-{
-    var backupDirectory = Directory.GetCurrentDirectory(); 
-    return new SqlServerDatabaseBackupProvider(configuration.GetConnectionString("DefaultConnection"), backupDirectory);
-});
-builder.Services.AddHostedService<DatabaseBackupService>();
+//builder.Services.AddSingleton<IDatabaseBackupProvider>(provider =>
+//{
+//    var backupDirectory = Directory.GetCurrentDirectory(); 
+//    return new SqlServerDatabaseBackupProvider(configuration.GetConnectionString("DefaultConnection"), backupDirectory);
+//});
+//builder.Services.AddHostedService<DatabaseBackupService>();
 #endregion
 builder.Services.AddAuthentication(options =>
 {
