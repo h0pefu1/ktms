@@ -11,8 +11,8 @@ namespace Infrastructure.Security
     {
         Task<UserResource> Register(RegisterResource resource);
         UserResource Login(LoginResource resource);
-        UserModel GetUser(UserResource userModel);
+        User GetUser(UserResource userModel);
 
-        UserModel GetUserByName(int Id);
+        User GetUserByName(int Id);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using DTO;
-using Infrastructure.DataBase;
+
+using KTMS.Infrastructure.DataBase;
+
 using Microsoft.EntityFrameworkCore;
 using Repositories.IRepositories;
 
@@ -8,38 +10,30 @@ namespace Repositories.Repositories
 {
     public class MeetingRepository : IMeetingRepository
     {
-        private DashboardDbContext _dbContext;
+        private KTMSDbContext _dbContext;
 
 
-        public MeetingRepository(DashboardDbContext dashboardDbContext)
+        public MeetingRepository(KTMSDbContext dashboardDbContext)
         {
             _dbContext = dashboardDbContext;
         }
-        public async Task<List<MeetingDTO>> GetMeetings()
+        public async Task<List<MeetingDTO>> GetMeetings(string userName)
         {
-            var stackOfTeams = new Stack<int>(new[] { 1, 2, 3 });
+            var MeetingByUsers = new List<MeetingDTO>();
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
-            var meetingDTOs = new List<MeetingDTO>();
-
-            while (stackOfTeams.Count > 0)
+            if(user!=null)
             {
-                var teamId = stackOfTeams.Pop();
-
-                var items = await _dbContext.Meetings
-                    .Include(m => m.MeetingType)
-                    .Include(m => m.Team)
-                    .Where(t => t.Team.Id == teamId)
-                    .Select(m => new MeetingDTO()
+                MeetingByUsers = await _dbContext.Meetings
+                    .Where(m => m.Users.Contains(user))
+                    .Select(m =>new MeetingDTO()
                     {
-                        Team = m.Team.Name,
-                        Status = m.Id % 2 == 0 ? "Ongoing" : "Incoming",
-                        DatePlanned = m.DatePlanned,
-                    }).ToListAsync();
-
-                meetingDTOs.AddRange(items);
+                        Name = m.Name
+                    })
+                    .ToListAsync();
             }
 
-            return meetingDTOs;
+                return MeetingByUsers;
         }
 
     }

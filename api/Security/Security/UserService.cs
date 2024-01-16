@@ -25,7 +25,7 @@ namespace Infrastructure.Security
 
         public async Task<UserResource> Register(RegisterResource resource)
         {
-            var user = new UserModel
+            var user = new User
             {
                 UserName = resource.Username,
                 PasswordSalt = PasswordHasher.GenerateSalt(),
@@ -55,14 +55,14 @@ namespace Infrastructure.Security
 
             return new UserResource(user.Id, user.UserName, user.Person, user.Role);
         }
-        public UserModel GetUser(UserResource userModel)
+        public User GetUser(UserResource userModel)
         {
             var user = _context.Users.FirstOrDefault(
                 usr => usr.Id == userModel.Id
                 );
             return user;
         }
-        public UserModel GetUserByName(int Id)
+        public User GetUserByName(int Id)
         {
             return _context.Users
                 .Include(r=>r.Role)

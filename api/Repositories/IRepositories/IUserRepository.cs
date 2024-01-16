@@ -12,7 +12,7 @@ namespace Infrastructure.IRepositories
     {
        void CreateUser(string login,string password);
 
-        UserModel GetUser(LoginResource userModel);
+        User GetUser(LoginResource userModel);
 
     }
 }

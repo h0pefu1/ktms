@@ -5,7 +5,7 @@ namespace Repositories.IRepositories
 {
 	public interface IMeetingRepository
 	{
-		Task<List<MeetingDTO>> GetMeetings();
+		Task<List<MeetingDTO>> GetMeetings(string userName);
 	}
 }
 

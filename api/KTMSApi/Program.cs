@@ -11,7 +11,6 @@ using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.IRepositories;
 using Infrastructure.Repositories;
-using Infrastructure.DataBase;
 using Repositories.Repositories;
 using Repositories.IRepositories;
 using KTMS.Infrastructure.DataBase;
@@ -36,9 +35,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KTMSDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("KTMSApi")
-
-   ));
-builder.Services.AddDbContext<DashboardDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("KTMSApi")
 
    ));
 #region Dependencies

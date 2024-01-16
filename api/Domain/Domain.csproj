@@ -30,8 +30,6 @@
     <None Remove="Entities\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Meeting\" />
     <Folder Include="Entities\Teams\" />
-    <Folder Include="Entities\User\" />
   </ItemGroup>
 </Project>

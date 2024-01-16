@@ -31,7 +31,7 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public UserModel GetUser(LoginResource userModel)
+        public User GetUser(LoginResource userModel)
         {
             throw new NotImplementedException();
 
