@@ -5,7 +5,7 @@ import Card from "components/card";
 
 const OngoingCard = () => {
   return (
-    <Card extra="pb-7 p-[20px]">
+    <Card extra="pb-7 p-[20px] col-span-2">
       {/* task header */}
       <div className="relative flex flex-row justify-between">
         <div className="flex items-center">

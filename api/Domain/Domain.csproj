@@ -29,7 +29,4 @@
     <None Remove="Entities\Teams\" />
     <None Remove="Entities\User\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Teams\" />
-  </ItemGroup>
 </Project>

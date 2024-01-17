@@ -10,7 +10,7 @@ const Widget = (props: {
 }) => {
   const { icon, title, subtitle,tillData,userCount } = props;
   return (
-    <Card extra="!flex-row flex-grow items-center rounded-[20px]"
+    <Card extra="!flex-row flex-grow items-center rounded-[20px] shadow-2xl shadow-shadow-500"
     >
       <div 
       onClick={()=>onclick}
@@ -22,7 +22,7 @@ const Widget = (props: {
         </div>
       </div>
 
-      <div className="h-50 ml-4 flex w-auto flex-col justify-center">
+      <div className="h-50 ml-4 flex w-auto flex-col justify-center p-4">
         <p className="font-dm text-sm font-medium text-gray-600">{title}</p>
         {
           tillData &&

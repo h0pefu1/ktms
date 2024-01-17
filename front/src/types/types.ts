@@ -28,3 +28,9 @@ export type Meeting = {
     datePlanned:Date,
 
 }
+export type Team={
+    name:string,
+}
+export type Dashboard={
+    persons:IPerson[]
+}

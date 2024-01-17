@@ -52,7 +52,7 @@ namespace Infrastructure.Security.Tokens
                 issuer: "https://localhost:5001",
                 audience: "https://localhost:5001",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);

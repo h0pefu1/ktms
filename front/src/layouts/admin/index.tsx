@@ -6,13 +6,19 @@ import Footer from "components/footer/Footer";
 import routes from "routes";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import UserService from "services/UserService";
+import { useDispatch } from "react-redux";
 
 export default function Admin(props: { [x: string]: any }) {
   const user = useSelector((state:RootState)=>state.user);
   const { ...rest } = props;
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
-  const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
+  const [currentRoute, setCurrentRoute] = React.useState("Dashboard");
+  const dispatch = useDispatch();
+  React.useEffect(()=>{
+  
+  },[])
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
@@ -24,7 +30,7 @@ export default function Admin(props: { [x: string]: any }) {
   }, [location.pathname]);
 
   const getActiveRoute = (routes: RoutesType[]): string | boolean => {
-    let activeRoute = "Main Dashboard";
+    let activeRoute = "Dashboard";
     for (let i = 0; i < routes.length; i++) {
       if (
         window.location.href.indexOf(
@@ -60,6 +66,9 @@ export default function Admin(props: { [x: string]: any }) {
   };
 
   document.documentElement.dir = "ltr";
+  if(!user.isAuth){
+    return <Navigate to='/auth' replace/>
+  }
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />

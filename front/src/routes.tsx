@@ -20,7 +20,7 @@ import Room from "video/pages/Room";
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Dashboard",
     layout: "/admin",
     path: "default",
     secondary:true,
@@ -56,6 +56,14 @@ const routes = [
     secondary:false,
     layout: "/admin",
     path: "room/:roomId",
+    icon: <MdLock className="h-6 w-6" />,
+    component: <Room />,
+  },
+  {
+    name: "Room",
+    secondary:false,
+    layout: "/admin",
+    path: "team/:teamId",
     icon: <MdLock className="h-6 w-6" />,
     component: <Room />,
   },
