@@ -27,6 +27,7 @@
     "mobx-react-lite": "^4.0.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
+    "react-big-calendar": "^1.8.6",
     "react-calendar": "^3.9.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
@@ -68,6 +69,7 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-big-calendar": "^1.8.8",
     "@types/react-calendar": "^3.5.2",
     "@types/react-redux": "^7.1.25",
     "@types/react-router-dom": "^5.3.3",

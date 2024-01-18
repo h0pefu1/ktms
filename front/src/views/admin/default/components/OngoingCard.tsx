@@ -1,7 +1,13 @@
 import CardMenu from "components/card/CardMenu";
 import Checkbox from "components/checkbox";
-import { MdDragIndicator, MdCheckCircle, MdBarChart, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdDragIndicator,
+  MdCheckCircle,
+  MdBarChart,
+  MdKeyboardArrowRight,
+} from "react-icons/md";
 import Card from "components/card";
+import OngoingCardItem from "./ongoingcard/OngoingCardItem";
 
 const OngoingCard = () => {
   return (
@@ -18,7 +24,7 @@ const OngoingCard = () => {
       {/* task content */}
 
       <div className="h-full w-full">
-        <div className="mt-5 flex items-center justify-between p-2">
+        <div className="mt-5 grid grid-cols-3 gap-4">
           <div className="flex items-center justify-center gap-2">
             <p className="text-base font-bold text-navy-700 dark:text-white">
               Name of meeting
@@ -26,22 +32,34 @@ const OngoingCard = () => {
           </div>
           <div className="flex items-center justify-center gap-2">
             <p className="text-base font-bold text-navy-700 dark:text-white">
-              People in meeting:
+              People in meeting
+            </p>
+          </div>
+          <div>
+            
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-base font-bold text-navy-700 dark:text-white">
+              test
             </p>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <button className="!linear z-[1] flex items-center justify-center rounded-lg bg-lightPrimary 
-          p-2 text-brand-500 !transition !duration-200 hover:bg-gray-100 
-          active:bg-gray-200 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10">
+            <p className="text-base font-bold text-navy-700 dark:text-white">
+              test
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <button
+              className="!linear z-[1] flex items-center justify-center rounded-lg bg-lightPrimary 
+    p-2 text-brand-500 !transition !duration-200 hover:bg-gray-100 
+    active:bg-gray-200 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10"
+            >
               Connect
               <MdKeyboardArrowRight className="h-6 w-6" />
             </button>
           </div>
-          <div>
-          </div>
+          <div></div>
         </div>
-
-
       </div>
     </Card>
   );

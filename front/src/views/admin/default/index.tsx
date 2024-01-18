@@ -16,6 +16,8 @@ import { v4 as uuid } from "uuid";
 import { Link } from "react-router-dom";
 import WidgetButton from "components/widget/WidgetButton";
 import UserOnlineList from "views/admin/default/components/UserOnlineList";
+import AppBigCalendar from "./components/calendar/AppBigCalendar";
+import "assets/css/AppBigCalendar.css";
 const testdaTA = [
   {
     status: "Upcoming",
@@ -67,6 +69,9 @@ const Dashboard = () => {
         <UserOnlineList />
       </div>
 
+        <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-1">
+          <AppBigCalendar/>
+        </div>
       {/* Tables & Charts */}
 
       <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-2">
