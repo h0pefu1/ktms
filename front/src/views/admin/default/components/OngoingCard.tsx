@@ -36,7 +36,7 @@ const OngoingCard = () => {
             </p>
           </div>
           <div>
-            
+            6
           </div>
           <div className="flex items-center justify-center gap-2">
             <p className="text-base font-bold text-navy-700 dark:text-white">

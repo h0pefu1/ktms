@@ -43,5 +43,26 @@ namespace KTMSApi.Controllers
             return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("useradditional")]
+        public async Task<ActionResult> GetUserAdditional()
+        {
+            try
+            {
+                var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
+                if (user == null)
+                {
+                    return StatusCode(401);
+                }
+
+                return Ok(
+                  await _profileRepository.GetUserProfileAdditionalInfo(user.Value)
+                    );
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

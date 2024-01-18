@@ -36,6 +36,26 @@ namespace Repositories.Repositories
             }
             return teamsList;
         }
+
+        public async Task<UserProfileDTO> GetUserProfileAdditionalInfo(string userName)
+        {
+            var user = await _dbContext.Users
+               . Include(p=>p.Person)
+                .FirstOrDefaultAsync(u => u.UserName == userName);
+            var profileAdditional = new UserProfileDTO();
+            if (user != null)
+            {
+                var person = await _dbContext.Persons.FirstOrDefaultAsync(u => u.Id == user.Person.Id);
+                profileAdditional.FirstName = person.FirstName;
+                profileAdditional.LastName= person.LastName;
+                profileAdditional.BirthDay = person.BirthDay;
+                profileAdditional.PhoneNumber = person.PhoneNumber;
+                profileAdditional.About = person.About;
+                profileAdditional.Email= person.Email;
+                return profileAdditional;
+            }
+            return null;
+        }
     }
 }
 
