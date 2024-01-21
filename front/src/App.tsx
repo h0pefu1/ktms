@@ -19,7 +19,7 @@ const App = () => {
   },[])
   useEffect(()=>{
     if(user.isAuth){
-      const socket = socketIOClient(ENDPOINT);
+      const socket = socketIOClient(ENDPOINT,{reconnectionAttempts:10});
       socket.emit('userConnected', user.person);
       socket.on('onlineUsers', (users: any[]) => {
         console.log(users);

@@ -8,7 +8,8 @@ namespace Domain.Entities.Meeting
 		public string Name { get; set; } = string.Empty;
 		public Team? Team { get; set; }
 		public MeetingType? MeetingType { get; set; }
-		public DateTime DatePlanned { get; set; } = DateTime.Now;
+		public DateTime DateStart { get; set; } = DateTime.Now;
+		public DateTime DateEnd { get; set; } = new DateTime(DateTime.Now.Ticks).AddMinutes(30);
 		public List<User>? Users { get; set; }
 	}
 }

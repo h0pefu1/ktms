@@ -1,5 +1,6 @@
 ﻿using System;
 using DTO;
+using DTO.Dashboard.Calendar;
 
 using KTMS.Infrastructure.DataBase;
 
@@ -34,6 +35,29 @@ namespace Repositories.Repositories
             }
 
                 return MeetingByUsers;
+        }
+
+        public async Task<List<CalendarMeetingDTO>> GetCalendarMeetings(string userName)
+        {
+            var MeetingByUsers = new List<CalendarMeetingDTO>();
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+            if (user != null)
+            {
+                MeetingByUsers = await _dbContext.Meetings
+                    .Where(m => m.Users.Contains(user))
+                    .Select(m => new CalendarMeetingDTO()
+                    {
+                        Title= m.Name,
+                        Start = m.DateStart,
+                        End = m.DateEnd,
+                        Id = m.Id,
+
+                    })
+                    .ToListAsync();
+            }
+
+            return MeetingByUsers;
         }
 
     }
