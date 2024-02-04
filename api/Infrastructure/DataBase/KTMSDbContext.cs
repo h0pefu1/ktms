@@ -3,6 +3,7 @@ using Domain.Entities.Meeting;
 using Domain.Entities.Teams;
 
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -31,24 +32,23 @@ namespace KTMS.Infrastructure.DataBase
         public virtual DbSet<TokenModel> Tokens { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
-        public DbSet<MeetingTeams> MeetingTeams { get; set; }
+        public DbSet<TeamMeeting> TeamMeetings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MeetingTeams>()
-          .HasKey(tm => new { tm.TeamId, tm.MeetingId });
+            modelBuilder.Entity<TeamMeeting>()
+                .HasKey(tm => new { tm.TeamId, tm.MeetingId });
 
-            modelBuilder.Entity<MeetingTeams>()
+            modelBuilder.Entity<TeamMeeting>()
                 .HasOne(tm => tm.Team)
-                .WithMany(t => t.Meetings)
+                .WithMany(t => t.TeamMeetings)
                 .HasForeignKey(tm => tm.TeamId);
 
-            modelBuilder.Entity<MeetingTeams>()
+            modelBuilder.Entity<TeamMeeting>()
                 .HasOne(tm => tm.Meeting)
-                .WithMany(m => m.Teams)
+                .WithMany(m => m.TeamMeetings)
                 .HasForeignKey(tm => tm.MeetingId);
         }
     }
 
-    }
 }
+

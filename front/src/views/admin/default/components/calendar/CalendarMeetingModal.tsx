@@ -27,13 +27,13 @@ type CalendarMettingProps = {
 function CalendarMeetingModal({ isOpen, onOpen, onClose, MeetingOrSlotRef }: CalendarMettingProps) {
   const [meeting, setMeeting] = useState({} as Meeting);
   useEffect(()=>{
-
+      
   },[])
 
 
 
   useEffect(() => {
-      if(MeetingOrSlotRef.SlotInfo != null || MeetingOrSlotRef.SlotInfo !=undefined){
+      if((MeetingOrSlotRef != undefined ||  MeetingOrSlotRef != null) && MeetingOrSlotRef.SlotInfo != null || MeetingOrSlotRef.SlotInfo !=undefined){
           setMeeting(prev=>({...prev,dateStart:MeetingOrSlotRef.SlotInfo.start,dateEnd:MeetingOrSlotRef.SlotInfo.end}))
       }
    }, [MeetingOrSlotRef])

@@ -12,7 +12,7 @@ namespace Domain.Entities.Meetings
 		public DateTime DateStart { get; set; } = DateTime.Now;
 		public DateTime DateEnd { get; set; } = new DateTime(DateTime.Now.Ticks).AddMinutes(30);
 		public List<User>? Users { get; set; }
-		public  virtual List<Team> Teams { get; set; }
-	}
+        public List<TeamMeeting> TeamMeetings { get; set; }
+    }
 }
 

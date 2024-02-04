@@ -53,7 +53,7 @@ function AppBigCalendar() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const localizer = momentLocalizer(moment);
-  const [MeetingOrSlot,setMeetingOrSlot] = useState(null);
+  const [MeetingOrSlot,setMeetingOrSlot] = useState({});
   const setRef = (ref:MeetingPopUpObject) => {
    setMeetingOrSlot(ref);
     onOpen();
