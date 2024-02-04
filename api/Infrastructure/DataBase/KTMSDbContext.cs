@@ -24,24 +24,31 @@ namespace KTMS.Infrastructure.DataBase
 
         }
 
-        public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<Domain.Entities.Meetings.Meeting> Meetings { get; set; }
         public virtual DbSet<MeetingType> MeetingTypes { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<TokenModel> Tokens { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
-        public virtual DbSet<MeetingUser> UserMeetings { get; set; }
-
-
+        public DbSet<MeetingTeams> MeetingTeams { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>()
-                .HasIndex(u=>u.UserName)
-                .IsUnique();
-                
+            modelBuilder.Entity<MeetingTeams>()
+          .HasKey(tm => new { tm.TeamId, tm.MeetingId });
+
+            modelBuilder.Entity<MeetingTeams>()
+                .HasOne(tm => tm.Team)
+                .WithMany(t => t.Meetings)
+                .HasForeignKey(tm => tm.TeamId);
+
+            modelBuilder.Entity<MeetingTeams>()
+                .HasOne(tm => tm.Meeting)
+                .WithMany(m => m.Teams)
+                .HasForeignKey(tm => tm.MeetingId);
         }
+    }
 
     }
 }

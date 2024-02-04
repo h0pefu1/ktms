@@ -28,7 +28,7 @@ const testEvents: CalendarEvent[] = [
     id: 1,
   }
 ]
-type MeetingPopUpObject ={
+export type MeetingPopUpObject ={
   CalendarEvent?:CalendarEvent,
   SlotInfo?:SlotInfo,
 }

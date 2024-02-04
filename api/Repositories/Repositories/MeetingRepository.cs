@@ -60,6 +60,10 @@ namespace Repositories.Repositories
             return MeetingByUsers;
         }
 
+        public Task<MeetingDTO> CreateMeeting(MeetingDTO meeting)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
