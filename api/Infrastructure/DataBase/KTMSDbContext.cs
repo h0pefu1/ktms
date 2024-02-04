@@ -3,6 +3,7 @@ using Domain.Entities.Meeting;
 using Domain.Entities.Teams;
 
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -24,24 +25,30 @@ namespace KTMS.Infrastructure.DataBase
 
         }
 
-        public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<Domain.Entities.Meetings.Meeting> Meetings { get; set; }
         public virtual DbSet<MeetingType> MeetingTypes { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<TokenModel> Tokens { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
-        public virtual DbSet<MeetingUser> UserMeetings { get; set; }
-
-
+        public DbSet<TeamMeeting> TeamMeetings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>()
-                .HasIndex(u=>u.UserName)
-                .IsUnique();
-                
-        }
+            modelBuilder.Entity<TeamMeeting>()
+                .HasKey(tm => new { tm.TeamId, tm.MeetingId });
 
+            modelBuilder.Entity<TeamMeeting>()
+                .HasOne(tm => tm.Team)
+                .WithMany(t => t.TeamMeetings)
+                .HasForeignKey(tm => tm.TeamId);
+
+            modelBuilder.Entity<TeamMeeting>()
+                .HasOne(tm => tm.Meeting)
+                .WithMany(m => m.TeamMeetings)
+                .HasForeignKey(tm => tm.MeetingId);
+        }
     }
+
 }
+

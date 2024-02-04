@@ -1,41 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using DTO;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepositories;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Security.Claims;
 
 namespace KTMSApi.Controllers
 {
-
-    [Route("api/dashboard")]
+    [Route("api/calendar")]
     [Authorize]
-    public class DashboardController : Controller
+    public class CalendarController : Controller
     {
 
         private IMeetingRepository _meetingRepository;
 
-        public DashboardController(IMeetingRepository meetingRepository)
+        public CalendarController(IMeetingRepository meetingRepository)
         {
             _meetingRepository = meetingRepository;
         }
-
-        [HttpGet("userMeetings")]
-        public async Task<ActionResult> GetRooms()
+        [HttpPost("createMeeting")]
+        public async Task<ActionResult> CreateMeeting([FromBody] MeetingDTO meetingDTO)
         {
-            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
-            if(user != null)
+            try
             {
+                var meeting = await _meetingRepository.CreateMeeting(meetingDTO);
 
-            return Ok(await _meetingRepository.GetMeetings(user.Value));
+                return Ok();
             }
-            return NotFound("User not found");
+            catch(Exception ex)
+            {
+            return BadRequest(ex.Message);
+
+            }
         }
+
         [HttpGet("getcalendarmeetings")]
         public async Task<ActionResult> GetCalendarMeetings()
         {
@@ -49,4 +47,3 @@ namespace KTMSApi.Controllers
         }
     }
 }
-

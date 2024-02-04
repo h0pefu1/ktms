@@ -22,39 +22,6 @@ namespace KTMSApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Meeting.Meeting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DatePlanned")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MeetingTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MeetingTypeId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Meetings");
-                });
-
             modelBuilder.Entity("Domain.Entities.Meeting.MeetingType", b =>
                 {
                     b.Property<int>("Id")
@@ -75,7 +42,7 @@ namespace KTMSApi.Migrations
                     b.ToTable("MeetingTypes");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Meeting.MeetingUser", b =>
+            modelBuilder.Entity("Domain.Entities.Meetings.Meeting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,19 +53,24 @@ namespace KTMSApi.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MeetingId")
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MeetingTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MeetingId");
+                    b.HasIndex("MeetingTypeId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserMeetings");
+                    b.ToTable("Meetings");
                 });
 
             modelBuilder.Entity("Domain.Entities.Person", b =>
@@ -159,6 +131,21 @@ namespace KTMSApi.Migrations
                     b.ToTable("Teams");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Teams.TeamMeeting", b =>
+                {
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeetingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamId", "MeetingId");
+
+                    b.HasIndex("MeetingId");
+
+                    b.ToTable("TeamMeetings");
+                });
+
             modelBuilder.Entity("Domain.Entities.TokenModel", b =>
                 {
                     b.Property<int>("Id")
@@ -208,16 +195,13 @@ namespace KTMSApi.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -237,38 +221,47 @@ namespace KTMSApi.Migrations
                     b.ToTable("MeetingUser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Meeting.Meeting", b =>
+            modelBuilder.Entity("TeamUser", b =>
+                {
+                    b.Property<int>("TeamsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("TeamUser");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Meetings.Meeting", b =>
                 {
                     b.HasOne("Domain.Entities.Meeting.MeetingType", "MeetingType")
                         .WithMany()
                         .HasForeignKey("MeetingTypeId");
 
-                    b.HasOne("Domain.Entities.Teams.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId");
-
                     b.Navigation("MeetingType");
-
-                    b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Meeting.MeetingUser", b =>
+            modelBuilder.Entity("Domain.Entities.Teams.TeamMeeting", b =>
                 {
-                    b.HasOne("Domain.Entities.Meeting.Meeting", "Meeting")
-                        .WithMany()
+                    b.HasOne("Domain.Entities.Meetings.Meeting", "Meeting")
+                        .WithMany("TeamMeetings")
                         .HasForeignKey("MeetingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("Domain.Entities.Teams.Team", "Team")
+                        .WithMany("TeamMeetings")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Meeting");
 
-                    b.Navigation("User");
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("Domain.Entities.TokenModel", b =>
@@ -303,7 +296,7 @@ namespace KTMSApi.Migrations
 
             modelBuilder.Entity("MeetingUser", b =>
                 {
-                    b.HasOne("Domain.Entities.Meeting.Meeting", null)
+                    b.HasOne("Domain.Entities.Meetings.Meeting", null)
                         .WithMany()
                         .HasForeignKey("MeetingsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -314,6 +307,31 @@ namespace KTMSApi.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TeamUser", b =>
+                {
+                    b.HasOne("Domain.Entities.Teams.Team", null)
+                        .WithMany()
+                        .HasForeignKey("TeamsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Meetings.Meeting", b =>
+                {
+                    b.Navigation("TeamMeetings");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Teams.Team", b =>
+                {
+                    b.Navigation("TeamMeetings");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

@@ -5,78 +5,78 @@
 namespace KTMSApi.Migrations
 {
     /// <inheritdoc />
-    public partial class UserMeeting5 : Migration
+    public partial class TeamMeetin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MeetingUserModel");
+                name: "MeetingTeam");
 
             migrationBuilder.CreateTable(
-                name: "MeetingUser",
+                name: "TeamMeetings",
                 columns: table => new
                 {
-                    MeetingsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    MeetingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MeetingUser", x => new { x.MeetingsId, x.UsersId });
+                    table.PrimaryKey("PK_TeamMeetings", x => new { x.TeamId, x.MeetingId });
                     table.ForeignKey(
-                        name: "FK_MeetingUser_Meetings_MeetingsId",
-                        column: x => x.MeetingsId,
+                        name: "FK_TeamMeetings_Meetings_MeetingId",
+                        column: x => x.MeetingId,
                         principalTable: "Meetings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MeetingUser_Users_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "Users",
+                        name: "FK_TeamMeetings_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MeetingUser_UsersId",
-                table: "MeetingUser",
-                column: "UsersId");
+                name: "IX_TeamMeetings_MeetingId",
+                table: "TeamMeetings",
+                column: "MeetingId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MeetingUser");
+                name: "TeamMeetings");
 
             migrationBuilder.CreateTable(
-                name: "MeetingUserModel",
+                name: "MeetingTeam",
                 columns: table => new
                 {
                     MeetingsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    TeamsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MeetingUserModel", x => new { x.MeetingsId, x.UsersId });
+                    table.PrimaryKey("PK_MeetingTeam", x => new { x.MeetingsId, x.TeamsId });
                     table.ForeignKey(
-                        name: "FK_MeetingUserModel_Meetings_MeetingsId",
+                        name: "FK_MeetingTeam_Meetings_MeetingsId",
                         column: x => x.MeetingsId,
                         principalTable: "Meetings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MeetingUserModel_Users_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "Users",
+                        name: "FK_MeetingTeam_Teams_TeamsId",
+                        column: x => x.TeamsId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MeetingUserModel_UsersId",
-                table: "MeetingUserModel",
-                column: "UsersId");
+                name: "IX_MeetingTeam_TeamsId",
+                table: "MeetingTeam",
+                column: "TeamsId");
         }
     }
 }
