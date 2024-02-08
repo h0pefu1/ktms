@@ -27,7 +27,7 @@ namespace Repositories.Repositories
             return await _dbContext.Teams.Select(t => new DropDownDTO()
             {
                 Label = t.Name,
-                Value = t.Id.ToString()
+                Value = t.Id
             }).ToListAsync();
         }
 
@@ -36,7 +36,7 @@ namespace Repositories.Repositories
             return await _dbContext.Users.Include(u=>u.Person).Select(t => new DropDownDTO()
             {
                 Label = $"{t.Person.FirstName} {t.Person.LastName}",
-                Value = t.Id.ToString()
+                Value = t.Id
             }).ToListAsync();
         }
     }

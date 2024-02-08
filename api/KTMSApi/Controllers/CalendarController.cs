@@ -18,21 +18,7 @@ namespace KTMSApi.Controllers
         {
             _meetingRepository = meetingRepository;
         }
-        [HttpPost("createMeeting")]
-        public async Task<ActionResult> CreateMeeting([FromBody] MeetingDTO meetingDTO)
-        {
-            try
-            {
-                var meeting = await _meetingRepository.CreateMeeting(meetingDTO);
-
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-            return BadRequest(ex.Message);
-
-            }
-        }
+    
 
         [HttpGet("getcalendarmeetings")]
         public async Task<ActionResult> GetCalendarMeetings()

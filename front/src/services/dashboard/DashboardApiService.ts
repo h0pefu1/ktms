@@ -7,6 +7,6 @@ export default class DashboardApiService{
         return $api.get<CalendarEvent[]>('Dashboard/getcalendarmeetings');
     }
     static async calendarMeetingCreateOrUpdate(meeting:Meeting):Promise<AxiosResponse<CalendarEvent>>{
-        return $api.post<CalendarEvent>('Dashboard/calendarmeeting',meeting);
+        return $api.post<CalendarEvent>('dashboard/calendarmeeting',meeting);
     }
 }

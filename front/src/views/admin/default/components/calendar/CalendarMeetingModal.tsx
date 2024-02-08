@@ -15,7 +15,8 @@ import {
   FormHelperText,
   Input
 } from '@chakra-ui/react'
-import { Meeting } from 'types/types';
+import { DropDownItem, Meeting, MeetingCreate } from 'types/types';
+import DropDownApiService from 'services/dashboard/calendar/DropDownApiService';
 const animatedComponents = makeAnimated();
 type CalendarMettingProps = {
   isOpen: boolean,
@@ -25,25 +26,48 @@ type CalendarMettingProps = {
 }
 
 function CalendarMeetingModal({ isOpen, onOpen, onClose, MeetingOrSlotRef }: CalendarMettingProps) {
-  const [meeting, setMeeting] = useState({} as Meeting);
+  const [meeting, setMeeting] = useState({} as MeetingCreate);
+  const [isAdditional, setIsAdditional] = useState<boolean>(false);
   useEffect(()=>{
-      
+    const fetchData =async ()=>{
+      const respnonce = await DropDownApiService.getDropDownValue("teams"); 
+      if(respnonce != undefined && respnonce.data != null){
+        setTeams(respnonce.data);
+      }
+
+    }
+    fetchData();
   },[])
+  const [teams,setTeams] = useState<DropDownItem[]>([] );
+  const [additionalUsers, setAdditionalUsers] = useState<DropDownItem[]>([]);
 
 
+  useEffect(()=>{
+    const fetchData =async ()=>{
+      const respnonce = await DropDownApiService.getDropDownValue("users"); 
+      if(respnonce != undefined && respnonce.data != null){
+        setAdditionalUsers(respnonce.data);
+      }
 
+  }
+  if(isAdditional){
+    fetchData();
+  }
+},[isAdditional])
   useEffect(() => {
       if((MeetingOrSlotRef != undefined ||  MeetingOrSlotRef != null) && MeetingOrSlotRef.SlotInfo != null || MeetingOrSlotRef.SlotInfo !=undefined){
           setMeeting(prev=>({...prev,dateStart:MeetingOrSlotRef.SlotInfo.start,dateEnd:MeetingOrSlotRef.SlotInfo.end}))
       }
    }, [MeetingOrSlotRef])
+   useEffect(()=>{
+    console.log(meeting);
+   },[meeting])
+  
+   const handleCreate=async() =>{
+   }  
 
-  const [isAdditional, setIsAdditional] = useState<boolean>(false);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+
+
   return (
     < div className="!z-[1010]">
       <Modal isOpen={isOpen}
@@ -70,10 +94,14 @@ function CalendarMeetingModal({ isOpen, onOpen, onClose, MeetingOrSlotRef }: Cal
               <FormControl>
                 <FormLabel>Meeting Team</FormLabel>
                 <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  options={options}
-                />
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      isMulti
+                      options={teams}
+                      onChange={(value,type)=>{
+                          setMeeting(prev=>({...prev,teams:[...value.map(item =>(item as any).value)]}))
+                      }}
+                    />
               </FormControl>
               <div className='flex gap-1'>
                 <Checkbox value={isAdditional} setValue={() => setIsAdditional(prev => !prev)} />
@@ -87,7 +115,10 @@ function CalendarMeetingModal({ isOpen, onOpen, onClose, MeetingOrSlotRef }: Cal
                       closeMenuOnSelect={false}
                       components={animatedComponents}
                       isMulti
-                      options={options}
+                      options={additionalUsers}
+                      onChange={(value,type)=>{
+                          setMeeting(prev=>({...prev,additionalUsers:[...value.map(item =>(item as any).value)]}))
+                      }}
                     />
                   </FormControl>
                 )

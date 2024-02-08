@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+using DTO;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepositories;
@@ -24,6 +26,23 @@ namespace KTMSApi.Controllers
         {
             _meetingRepository = meetingRepository;
         }
+
+        [HttpPost("calendarmeeting")]
+        public async Task<ActionResult> CreateMeeting([FromBody] MeetingDTO meetingDTO)
+        {
+            try
+            {
+                var meeting = await _meetingRepository.CreateMeeting(meetingDTO);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
+        }
+
 
         [HttpGet("userMeetings")]
         public async Task<ActionResult> GetRooms()

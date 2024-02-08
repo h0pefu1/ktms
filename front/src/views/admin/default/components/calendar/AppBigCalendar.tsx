@@ -16,10 +16,6 @@ export type CalendarEvent = {
   allDay?: boolean
   id: number,
 }
-const event = {
-  title: "event",
-  id: 1,
-}
 const testEvents: CalendarEvent[] = [
   {
     title: "test",
