@@ -10,7 +10,7 @@ namespace Repositories.IRepositories
 
 		Task<List<CalendarMeetingDTO>> GetCalendarMeetings(string userName);
 
-		Task<MeetingDTO> CreateMeeting(MeetingCreateDTO meeting);
+		Task<CalendarMeetingDTO> CreateMeeting(MeetingCreateDTO meeting);
 
     }
 }

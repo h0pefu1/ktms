@@ -65,54 +65,45 @@ namespace Repositories.Repositories
             return MeetingByUsers;
         }
 
-        public async Task<MeetingDTO> CreateMeeting(MeetingCreateDTO meeting)
+        public async Task<CalendarMeetingDTO> CreateMeeting(MeetingCreateDTO meeting)
         {
+       
             var Meeting = await _dbContext.Meetings.FirstOrDefaultAsync(m => m.Id == meeting.Id);
             if(Meeting !=null && Meeting.Id > 0)
             {
                 Meeting.DateStart = meeting.DateStart;
                 Meeting.DateEnd = meeting.DateEnd;
                 Meeting.Name = meeting.Name;
-                Meeting.TeamMeetings = meeting.Teams.Select(item => new TeamMeeting()
+                if (meeting.AdditionalUsers != null && meeting.AdditionalUsers.Count > 0)
                 {
-                    MeetingId = Meeting.Id,
-                    TeamId = item
-                }).ToList();
-                if(meeting.AdditionalUsers  != null && meeting.AdditionalUsers.Count > 0)
-                {
-                    Meeting.Users = meeting.AdditionalUsers.Select(item => new User()
-                    {
-                        Id = item
-                    }).ToList();
+                    Meeting.Users = _dbContext.Users.Where(item => meeting.AdditionalUsers.Contains(item.Id)).ToList();
                 }
-                 _dbContext.Update(Meeting);
+                Meeting.Teams = await _dbContext.Teams.Where(item => meeting.Teams.Contains(item.Id)).ToListAsync();
+                _dbContext.Meetings.Update(Meeting);
+
             }
             else
             {
+                Meeting = new Meeting();
                 Meeting.DateStart = meeting.DateStart;
                 Meeting.DateEnd = meeting.DateEnd;
                 Meeting.Name = meeting.Name;
                 if (meeting.AdditionalUsers != null && meeting.AdditionalUsers.Count > 0)
                 {
-                    Meeting.Users = meeting.AdditionalUsers.Select(item => new User()
-                    {
-                        Id = item
-                    }).ToList();
+                    Meeting.Users = _dbContext.Users.Where(item => meeting.AdditionalUsers.Contains(item.Id)).ToList();
                 }
-                await _dbContext.AddAsync(Meeting);
-                Meeting.TeamMeetings = meeting.Teams.Select(item => new TeamMeeting()
-                {
-                    MeetingId = Meeting.Id,
-                    TeamId = item
-                }).ToList();
+                Meeting.Teams = await _dbContext.Teams.Where(item=>meeting.Teams.Contains(item.Id)).ToListAsync();
+                 _dbContext.Meetings.Add(Meeting);
+         
+                
             }
-            return new MeetingDTO()
+            _dbContext.SaveChanges();
+            return new CalendarMeetingDTO()
             {
-                DateStart = Meeting.DateStart,
-                DateEnd = Meeting.DateEnd,
-                Name = Meeting.Name,
-                AdditionalUsers = Meeting.Users.Select(item => new DTO.User.UserDTO() { FullName = item.UserName, Id = item.Id }).ToList(),
-                Teams = Meeting.TeamMeetings.Select(item => new DTO.User.TeamDTO() { Id = item.TeamId, Name = item.Team.Name }).ToList()
+                Start= Meeting.DateStart,
+                End = Meeting.DateEnd,
+                Title= Meeting.Name,
+                Id = Meeting.Id
             };
         }
     }
