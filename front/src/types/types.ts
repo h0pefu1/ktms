@@ -21,16 +21,30 @@ export interface IUser{
     person?: IPerson,
     isAuth?:boolean
 }
+export type IUserForMeeeting={
+    person?:IPerson,
+    id?:number,
+}
 
 export type Meeting = {
-    status:string,
-    team:string,
-    datePlanned:Date,
+    name:string,
+    teams?:Team[],
+    dateStart:Date,
+    dateEnd:Date,
+    additionalUsers?:IUserForMeeeting[],
+}
 
+export type MeetingCreate = {
+    name:string,
+    dateStart:Date,
+    dateEnd:Date,
+    additionalUsers?: number[], 
+    teams?: number[], 
 }
 export type Team={
     name:string,
 }
+
 export type UserAdditional={
     id:number,
     firstName:string,
@@ -41,7 +55,17 @@ export type UserAdditional={
     about:string,
 }
 
+export type MeetingType={
+    name:string,
+
+}
+
 
 export type Dashboard={
     persons:IPerson[]
+}
+
+export type DropDownItem={
+    value:number,
+    label:string,
 }

@@ -7,7 +7,6 @@ import { IoDocuments } from "react-icons/io5";
 import { MdArrowRight, MdBarChart, MdDashboard, MdVideoCall } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import Widget from "components/widget/Widget";
 import DailyTraffic from "views/admin/default/components/DailyTraffic";
 import OngoingCard from "views/admin/default/components/OngoingCard";
 import tableDataCheck from "./variables/tableDataCheck";
@@ -18,6 +17,7 @@ import WidgetButton from "components/widget/WidgetButton";
 import UserOnlineList from "views/admin/default/components/UserOnlineList";
 import AppBigCalendar from "./components/calendar/AppBigCalendar";
 import "assets/css/AppBigCalendar.css";
+import UpcomingList from "./components/upcoming-list/UpcomingList";
 const testdaTA = [
   {
     status: "Upcoming",
@@ -44,20 +44,7 @@ const Dashboard = () => {
     <div>
       {/* Card widget */}
       <div className="flex justify-between">
-        <div className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 ">
-          {testdaTA.map((item, index) => (
-            <div>
-              <Widget
-                key={index}
-                icon={<MdVideoCall className="h-7 w-7" />}
-                title={item.status}
-                subtitle={item.team}
-                tillData={item.status == "Upcoming" ? item.till : null}
-                userCount={item.status == "Ongoing" ? item.userCounts : null}
-              />
-            </div>
-          ))}
-        </div>
+        <UpcomingList/>
         <WidgetButton  title="Start Meeting" innerContent={<MdArrowRight className="h7 w-7"/>} onclick={function () {
           throw new Error("Function not implemented.");
         } }/>

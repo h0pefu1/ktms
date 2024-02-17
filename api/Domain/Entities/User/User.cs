@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Meeting;
+﻿using Domain.Entities.Meetings;
+using Domain.Entities.Meeting;
 using Domain.Entities.Teams;
 
 using Microsoft.Extensions.Hosting;
@@ -28,8 +29,9 @@ namespace Domain.Entities
         public Role Role { get; set; }
         public Person Person { get; set; }
 
-        public List<Domain.Entities.Meeting.Meeting> Meetings { get; set; }
+        public List<Domain.Entities.Meetings.Meeting> Meetings { get; set; }
         public virtual List<Team> Teams { get; set; }
+
         [JsonIgnore]
         public ICollection<TokenModel> Tokens { get; }
     }
