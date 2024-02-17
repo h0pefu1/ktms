@@ -44,8 +44,20 @@ export type MeetingCreate = {
 export type Team={
     name:string,
 }
+
+export type UserAdditional={
+    id:number,
+    firstName:string,
+    lastName:string,
+    email?:String,
+    phoneNumber?:string,
+    birthDay?:Date,
+    about:string,
+}
+
 export type MeetingType={
     name:string,
+
 }
 
 
