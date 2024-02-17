@@ -66,6 +66,17 @@ namespace KTMSApi.Controllers
             }
             return NotFound("User not found");
         }
+
+        [HttpGet("getupcomings")]
+        public async Task<ActionResult> GetUpcomingMeetings()
+        {
+            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
+            if (user != null)
+            {
+                return Ok(await _meetingRepository.GetUpcomingDTO(user.Value));
+            }
+            return NotFound("User not found");
+        }
     }
 }
 
