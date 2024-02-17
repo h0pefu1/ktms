@@ -1,6 +1,7 @@
 ﻿using System;
 using DTO;
 using DTO.Dashboard.Calendar;
+using DTO.Meeting;
 
 namespace Repositories.IRepositories
 {
@@ -10,8 +11,9 @@ namespace Repositories.IRepositories
 
 		Task<List<CalendarMeetingDTO>> GetCalendarMeetings(string userName);
 
-		Task<MeetingDTO> CreateMeeting(MeetingDTO meeting);
+		Task<CalendarMeetingDTO> CreateMeeting(MeetingCreateDTO meeting);
 
+		Task<List<UpcomingDTO>> GetUpcomingDTO(string userName);
     }
 }
 

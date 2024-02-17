@@ -16,10 +16,6 @@ export type CalendarEvent = {
   allDay?: boolean
   id: number,
 }
-const event = {
-  title: "event",
-  id: 1,
-}
 const testEvents: CalendarEvent[] = [
   {
     title: "test",
@@ -58,12 +54,15 @@ function AppBigCalendar() {
    setMeetingOrSlot(ref);
     onOpen();
   };
+
+  const handleAddCalendarMeeting=(meeting:CalendarEvent)=>{
+    setCalendarEvents(prev=>[...prev,meeting])
+  }
   return (
 <>
-<CalendarMeetingModal isOpen={isOpen} onOpen={()=>onOpen
-      } onClose={onClose}
-      MeetingOrSlotRef={MeetingOrSlot}
-      />
+<CalendarMeetingModal isOpen={isOpen} onOpen={() => onOpen} onClose={() => onClose()}
+      MeetingOrSlotRef={MeetingOrSlot} setMeetingToCalendar={handleAddCalendarMeeting
+       }      />
     <Card>
  
       <Calendar

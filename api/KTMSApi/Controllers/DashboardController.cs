@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+using DTO;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepositories;
@@ -25,6 +27,23 @@ namespace KTMSApi.Controllers
             _meetingRepository = meetingRepository;
         }
 
+        [HttpPost("calendarmeeting")]
+        public async Task<ActionResult> CreateMeeting([FromBody] MeetingCreateDTO meetingDTO)
+        {
+            try
+            {
+                var meeting = await _meetingRepository.CreateMeeting(meetingDTO);
+
+                return Ok(meeting);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
+        }
+
+
         [HttpGet("userMeetings")]
         public async Task<ActionResult> GetRooms()
         {
@@ -44,6 +63,17 @@ namespace KTMSApi.Controllers
             {
 
                 return Ok(await _meetingRepository.GetCalendarMeetings(user.Value));
+            }
+            return NotFound("User not found");
+        }
+
+        [HttpGet("getupcomings")]
+        public async Task<ActionResult> GetUpcomingMeetings()
+        {
+            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
+            if (user != null)
+            {
+                return Ok(await _meetingRepository.GetUpcomingDTO(user.Value));
             }
             return NotFound("User not found");
         }

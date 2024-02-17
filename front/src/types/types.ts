@@ -33,6 +33,14 @@ export type Meeting = {
     dateEnd:Date,
     additionalUsers?:IUserForMeeeting[],
 }
+
+export type MeetingCreate = {
+    name:string,
+    dateStart:Date,
+    dateEnd:Date,
+    additionalUsers?: number[], 
+    teams?: number[], 
+}
 export type Team={
     name:string,
 }
@@ -43,4 +51,9 @@ export type MeetingType={
 
 export type Dashboard={
     persons:IPerson[]
+}
+
+export type DropDownItem={
+    value:number,
+    label:string,
 }
