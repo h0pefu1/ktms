@@ -164,3 +164,6 @@ body.dark .react-calendar__tile--rangeEnd:enabled:focus {
 	padding: 1rem !important;
 	border-radius: 0.375rem !important;
 }
+.MuiDialog-root{
+	z-index: 9999 !important;
+}
