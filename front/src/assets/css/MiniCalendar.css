@@ -155,3 +155,12 @@ body.dark .react-calendar__tile--rangeEnd:enabled:focus {
 	background: #7551ff;
 	color: white;
 }
+.MuiPickersPopper-root{
+	z-index: 9999 !important;
+}
+.MuiInputBase-root{
+	height: 2.5rem;
+	font-size:1rem;
+	padding: 1rem !important;
+	border-radius: 0.375rem !important;
+}

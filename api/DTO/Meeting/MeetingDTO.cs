@@ -8,7 +8,7 @@ public class MeetingDTO
     public DateTime DateStart{ get; set; }
     public DateTime DateEnd{ get; set; }
     public List<TeamDTO> Teams{ get; set; }
-    public List<UserDTO> AdditionalUsers{ get; set; }
+    public List<UserProfileDTO> AdditionalUsers{ get; set; }
 }
 public class MeetingCreateDTO
 {

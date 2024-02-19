@@ -806,4 +806,125 @@ button.rbc-input::-moz-focus-inner {
   pointer-events: none;
 }
 
+
+.react-datetimepicker {
+  font-family: unset;
+  font-size: 0.9rem;
+}
+
+.react-datetimepicker-wrapper,
+.react-datetimepicker__input-container {
+  display: block;
+}
+
+.react-datetimepicker__input-container {
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  border-color: hsl(0,0%,80%);
+}
+
+.react-datetimepicker__input-container:hover {
+  border-color: hsl(0,0%,70%);
+}
+.react-datetimepicker__input-container:focus-within {
+  z-index: 1;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+.react-datetimepicker__input-container > input {
+  width: 100%;
+  height: 100%;
+  outline: 0;
+}
+
+.react-datetimepicker__navigation--next--with-time:not(.react-datetimepicker__navigation--next--with-today-button) {
+  right: 90px;
+}
+
+.react-datetimepicker__navigation--previous,
+.react-datetimepicker__navigation--next {
+  height: 8px;
+}
+
+.react-datetimepicker__navigation--previous {
+  border-right-color: #cbd5e0;
+}
+
+.react-datetimepicker__navigation--previous:hover {
+  border-right-color: #a0aec0;
+}
+
+.react-datetimepicker__navigation--next {
+  border-left-color: #cbd5e0;
+
+}
+
+.react-datetimepicker__navigation--next:hover {
+  border-left-color: #a0aec0;
+}
+
+.react-datetimepicker__header {
+  background: #f7fafc;
+}
+
+.react-datetimepicker__header,
+.react-datetimepicker__time-container {
+  border-color: #E2E8F0;
+}
+
+.react-datetimepicker__current-month,
+.react-datetimepicker-time__header,
+.react-datetimepicker-year-header {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.react-datetimepicker__time-container .react-datetimepicker__time .react-datetimepicker__time-box ul.react-datetimepicker__time-list li.react-datetimepicker__time-list-item {
+  margin: 0 1px 0 0;
+  height: auto;
+  padding: 7px 10px;
+}
+
+.react-datetimepicker__time-container .react-datetimepicker__time .react-datetimepicker__time-box ul.react-datetimepicker__time-list li.react-datetimepicker__time-list-item:hover {
+  background: #edf2f7;
+}
+
+.react-datetimepicker__day:hover {
+  background: #edf2f7;
+}
+
+.react-datetimepicker__day--selected,
+.react-datetimepicker__day--in-selecting-range,
+.react-datetimepicker__day--in-range,
+.react-datetimepicker__month-text--selected,
+.react-datetimepicker__month-text--in-selecting-range,
+.react-datetimepicker__month-text--in-range,
+.react-datetimepicker__time-container .react-datetimepicker__time .react-datetimepicker__time-box ul.react-datetimepicker__time-list li.react-datetimepicker__time-list-item--selected {
+  background: #3182ce;
+  font-weight: normal;
+}
+
+.react-datetimepicker__time-container .react-datetimepicker__time .react-datetimepicker__time-box ul.react-datetimepicker__time-list li.react-datetimepicker__time-list-item--selected:hover {
+  background: #2a69ac;
+}
+
+.react-datetimepicker__close-icon::after {
+  background-color: unset;
+  border-radius: unset;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: hsl(0,0%,80%);
+  height: 20px;
+  width: 20px;
+}
+
+.react-datetimepicker__close-icon::after:hover {
+  color: hsl(0,0%,70%)
+}
+
 /*# sourceMappingURL=react-big-calendar.css.map */
