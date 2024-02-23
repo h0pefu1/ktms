@@ -2,8 +2,10 @@ import React from "react";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
+import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/tables";
+import RTLDefault from "views/rtl/default";
 
 // Auth Imports
 import SignIn from "views/auth/SignIn";
@@ -16,21 +18,26 @@ import {
   MdPerson,
   MdLock,
 } from "react-icons/md";
-import Room from "video/pages/Room";
 
 const routes = [
   {
-    name: "Dashboard",
+    name: "Main Dashboard",
     layout: "/admin",
     path: "default",
-    secondary:true,
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
   },
   {
+    name: "NFT Marketplace",
+    layout: "/admin",
+    path: "nft-marketplace",
+    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
+    component: <NFTMarketplace />,
+    secondary: true,
+  },
+  {
     name: "Data Tables",
     layout: "/admin",
-    secondary:true,
     icon: <MdBarChart className="h-6 w-6" />,
     path: "data-tables",
     component: <DataTables />,
@@ -38,36 +45,23 @@ const routes = [
   {
     name: "Profile",
     layout: "/admin",
-    secondary:true,
     path: "profile",
     icon: <MdPerson className="h-6 w-6" />,
     component: <Profile />,
   },
   {
     name: "Sign In",
-    
     layout: "/auth",
     path: "sign-in",
     icon: <MdLock className="h-6 w-6" />,
     component: <SignIn />,
   },
   {
-    name: "Room",
-    secondary:false,
-    layout: "/admin",
-    path: "room/:roomId",
-    icon: <MdLock className="h-6 w-6" />,
-    component: <Room />,
+    name: "RTL Admin",
+    layout: "/rtl",
+    path: "rtl",
+    icon: <MdHome className="h-6 w-6" />,
+    component: <RTLDefault />,
   },
-  {
-    name: "Room",
-    secondary:false,
-    layout: "/admin",
-    path: "team/:teamId",
-    icon: <MdLock className="h-6 w-6" />,
-    component: <Room />,
-  },
-
-  
 ];
 export default routes;

@@ -1,30 +1,8 @@
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
-import { useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "store/store";
-import AuthService from "services/AuthService";
-import { v4 as uuid } from 'uuid';
-import { login } from "store/user/userSlice";
-import UserService from "services/UserService";
-
-
- 
 
 export default function SignIn() {
-const {user} = useSelector((state:RootState)=>state);
-  const dispatch = useDispatch();
-  const [userName,setUserName] = useState('');
-    const [userPassword,setUserPasssword] = useState('');
-    async function handleEnterLogin(usernm:string,password:string) {
-        UserService.loginUser(dispatch,usernm,password);
-      console.log(user);
-    }
-
-
-
-
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
@@ -33,22 +11,29 @@ const {user} = useSelector((state:RootState)=>state);
           Sign In
         </h4>
         <p className="mb-9 ml-1 text-base text-gray-600">
-          Enter your login and password to sign in!
+          Enter your email and password to sign in!
         </p>
-      
+        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
+          <div className="rounded-full text-xl">
+            <FcGoogle />
+          </div>
+          <h5 className="text-sm font-medium text-navy-700 dark:text-white">
+            Sign In with Google
+          </h5>
+        </div>
         <div className="mb-6 flex items-center  gap-3">
+          <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+          <p className="text-base text-gray-600 dark:text-white"> or </p>
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
         </div>
         {/* Email */}
         <InputField
           variant="auth"
           extra="mb-3"
-          label="Login*"
-          placeholder="Login"
-          id="login"
+          label="Email*"
+          placeholder="mail@simmmple.com"
+          id="email"
           type="text"
-          value = {userName}
-          onchange={(e:any)=>setUserName(e.target.value)}
         />
 
         {/* Password */}
@@ -59,11 +44,9 @@ const {user} = useSelector((state:RootState)=>state);
           placeholder="Min. 8 characters"
           id="password"
           type="password"
-          value = {userPassword}
-          onchange={(e:any)=>setUserPasssword(e.target.value)}
         />
         {/* Checkbox */}
-        {/* <div className="mb-4 flex items-center justify-between px-2">
+        <div className="mb-4 flex items-center justify-between px-2">
           <div className="flex items-center">
             <Checkbox />
             <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
@@ -76,14 +59,11 @@ const {user} = useSelector((state:RootState)=>state);
           >
             Forgot Password?
           </a>
-        </div> */}
-        <button
-        onClick={()=>handleEnterLogin(userName,userPassword)}
-         className="linear mt-2 w-full rounded-xl
-          bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+        </div>
+        <button className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
           Sign In
         </button>
-        {/* <div className="mt-4">
+        <div className="mt-4">
           <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
             Not registered yet?
           </span>
@@ -93,7 +73,7 @@ const {user} = useSelector((state:RootState)=>state);
           >
             Create an account
           </a>
-        </div> */}
+        </div>
       </div>
     </div>
   );

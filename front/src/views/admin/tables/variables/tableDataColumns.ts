@@ -7,13 +7,13 @@ type RowObj = {
 
 const tableDataColumns: RowObj[] = [
 	{
-		name: 'Galex',
+		name: 'Horizon UI PRO',
 		quantity: 2458,
 		progress: '17.5%',
 		date: '12 Jan 2021', 
 	},
 	{
-		name:'Galex',
+		name:'Horizon UI Free',
 		quantity: 1485,
 		progress: '10.8%',
 		date: '21 Feb 2021', 

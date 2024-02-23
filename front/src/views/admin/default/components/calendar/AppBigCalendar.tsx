@@ -8,6 +8,7 @@ import CalendarMeetingModal from "./CalendarMeetingModal";
 import { useDisclosure } from "@chakra-ui/hooks";
 import useCalendarMeeting from "components/hooks";
 import DashboardApiService from "services/dashboard/DashboardApiService";
+import { Drawer } from "@mui/material";
 
 export type CalendarEvent = {
   title: string,
@@ -47,7 +48,13 @@ function AppBigCalendar() {
     fetch();
   }, [])
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen, setOpen] = React.useState(false);
+  const onOpen = ()=>{
+    setOpen(true);
+  }
+  const onClose = ()=>{
+    setOpen(false);
+  }
   const localizer = momentLocalizer(moment);
   const [MeetingOrSlot,setMeetingOrSlot] = useState({});
   const setRef = (ref:MeetingPopUpObject) => {
@@ -60,11 +67,9 @@ function AppBigCalendar() {
   }
   return (
 <>
-<CalendarMeetingModal isOpen={isOpen} onOpen={() => onOpen} onClose={() => onClose()}
-      MeetingOrSlotRef={MeetingOrSlot} setMeetingToCalendar={handleAddCalendarMeeting
-       }      />
-    <Card>
- 
+
+      
+    <Card extra={"mt-3 !z-5 overflow-hidden"}>
       <Calendar
         localizer={localizer}
         events={calendarEvents}
@@ -73,10 +78,14 @@ function AppBigCalendar() {
         selectable={true}
         onSelectSlot={(slot) => setRef({SlotInfo:slot})}
         onSelectEvent={(e) => setRef({CalendarEvent:e})}
-        style={{ height: 500, padding: 20 }}
+        style={{ padding: "0.75rem" }}
         views={['month', 'week', 'day']}
         />
     </Card>
+
+    <CalendarMeetingModal isOpen={isOpen} onOpen={() => onOpen} onClose={() => onClose()}
+      MeetingOrSlotRef={MeetingOrSlot} setMeetingToCalendar={handleAddCalendarMeeting
+       }      />
         </>
   );
 }

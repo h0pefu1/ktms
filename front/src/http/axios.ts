@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { error } from "console";
 import { AuthResponse } from "types/types";
 
 // export const API_URL = `http://testapi.amap.galex.md/api`
