@@ -67,9 +67,7 @@ function AppBigCalendar() {
   }
   return (
 <>
-
-      
-    <Card extra={"mt-3 !z-5 overflow-hidden"}>
+    <Card extra={"mt-3 !z-5  col-span-2 row-span-2 min-h-96"}>
       <Calendar
         localizer={localizer}
         events={calendarEvents}
@@ -78,10 +76,11 @@ function AppBigCalendar() {
         selectable={true}
         onSelectSlot={(slot) => setRef({SlotInfo:slot})}
         onSelectEvent={(e) => setRef({CalendarEvent:e})}
-        style={{ padding: "0.75rem" }}
+        style={{ padding: "0.75rem",minHeight:"40rem" }}
         views={['month', 'week', 'day']}
         />
     </Card>
+
 
     <CalendarMeetingModal isOpen={isOpen} onOpen={() => onOpen} onClose={() => onClose()}
       MeetingOrSlotRef={MeetingOrSlot} setMeetingToCalendar={handleAddCalendarMeeting

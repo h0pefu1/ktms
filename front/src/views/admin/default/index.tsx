@@ -1,16 +1,18 @@
 import { IoMdHome } from "react-icons/io";
 import { IoDocuments } from "react-icons/io5";
-import { MdBarChart, MdDashboard } from "react-icons/md";
+import { MdBarChart, MdCreate, MdDashboard, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 import Widget from "components/widget/Widget";
 import AppBigCalendar from "./components/calendar/AppBigCalendar";
 import UpcomingList from "./components/upcoming-list/UpcomingList";
+import Card from "components/card";
+import CardButton from "components/button-cards/CardButton";
 
 const Dashboard = () => {
   return (
     <div>
       {/* Card widget */}
-      <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
+      {/* <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
           title={"Earnings"}
@@ -41,12 +43,20 @@ const Dashboard = () => {
           title={"Total Projects"}
           subtitle={"$2433"}
         />
-      </div>
+      </div> */}
 
       {/* Charts */}
 
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3">
+        <div className="mt-3">
+        <CardButton
+        extra="transition-colors duration-300 ease-in-out hover:bg-brand-400 cursor-pointer"
+            icon={<MdCreate className="h-7 w-7" />}
+            title={"Add Meeting"} onClick={undefined}  
+            iconInText={<MdKeyboardDoubleArrowRight/>}
+            />
         <UpcomingList />
+        </div>
         <AppBigCalendar />
       </div>
 

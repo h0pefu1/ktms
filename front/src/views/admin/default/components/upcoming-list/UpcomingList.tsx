@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import DashboardApiService from 'services/dashboard/DashboardApiService'
 import UpcomingListItem, { UpcomingListItemType } from './UpcomingListItem';
 import Card from 'components/card';
-import { MdArrowRight, MdKeyboardDoubleArrowRight, MdModeEditOutline } from 'react-icons/md';
+import { MdArrowRight, MdKeyboardDoubleArrowRight, MdLockClock, MdModeEditOutline } from 'react-icons/md';
+import { IoMdClock } from 'react-icons/io';
 
 function UpcomingList() {
     const [upcomings,setUpcomings] = useState<UpcomingListItemType[]>([]);
@@ -24,39 +25,10 @@ function UpcomingList() {
           price: 0.4,
           time: "30s",
         },
-        {
-          title: "Abstract Colors",
-          owner: "Esthera Jackson",
-          price: 2.4,
-          time: "50m",
-        },
-        {
-          title: "ETH AI Brain",
-          owner: "Nick Wilson",
-          price: 0.3,
-          time: "20s",
-        },
-        {
-          title: "Swipe Circles",
-          owner: " Peter Will",
-          price: 0.4,
-          time: "4h",
-        },
-        {
-          title: "Mesh Gradients",
-          owner: "Will Smith",
-          price: 0.4,
-          time: "30s",
-        },
-        {
-          title: "3D Cubes Art",
-          owner: " Manny Gates",
-          price: 0.4,
-          time: "2m",
-        },
+
+      
       ];
   return (
-    
     // <div className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 ">
     //             {
     //                 upcomings.length > 0 &&
@@ -78,8 +50,12 @@ function UpcomingList() {
 
     {/* History CardData */}
 
+
+
     {HistoryData.map((data, index) => (
-       <div className="mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+       <div className="
+       transition-colors duration-300 ease-in-out hover:bg-brand-400 cursor-pointer
+       mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
        <div className="flex items-center">
          <div className="h-[83px] w-[83px] rounded-lg bg-gray-300 flex items-center flex-col justify-center">
             <div className='items-center'>Wed</div>
@@ -87,17 +63,17 @@ function UpcomingList() {
          </div>
          <div className="ml-4">
            <p className="text-base font-medium text-navy-700 dark:text-white">
-             Technology behind the Blockchain
+             Meeting Name
            </p>
-           <p className="mt-2 text-sm text-gray-600">
-             Project #1 .
-             <a
-               className="ml-1 font-medium text-brand-500 hover:text-brand-500 dark:text-white"
-               href=" "
-             >
-               See product details
-             </a>
+           <div className='flex  items-center gap-2'>
+           <p className="mt-2 text-sm text-gray-600 ">
+           <IoMdClock/>
            </p>
+           <p className="mt-2 text-sm text-gray-600 ">
+            8:00-12:00
+           </p>
+
+           </div>
          </div>
        </div>
        <div className="mr-4 flex items-center justify-center text-gray-600 dark:text-white">
