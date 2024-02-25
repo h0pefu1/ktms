@@ -3,8 +3,11 @@ import authImg from "assets/img/auth/auth.png";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
 import routes from "routes";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 export default function Auth() {
+  const user = useSelector((state:RootState)=>state.user);
   const getRoutes = (routes: RoutesType[]): any => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
@@ -17,6 +20,7 @@ export default function Auth() {
     });
   };
   document.documentElement.dir = "ltr";
+  if(user.isAuth) return <Navigate to='/admin' replace/>
   return (
     <div>
       <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">

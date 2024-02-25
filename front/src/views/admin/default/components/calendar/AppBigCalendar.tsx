@@ -9,6 +9,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import useCalendarMeeting from "components/hooks";
 import DashboardApiService from "services/dashboard/DashboardApiService";
 import { Drawer } from "@mui/material";
+import { useDrawer } from "components/drawer/DrawerContext";
 
 export type CalendarEvent = {
   title: string,
@@ -49,22 +50,19 @@ function AppBigCalendar() {
   }, [])
 
   const [isOpen, setOpen] = React.useState(false);
-  const onOpen = ()=>{
-    setOpen(true);
-  }
-  const onClose = ()=>{
-    setOpen(false);
-  }
+ 
   const localizer = momentLocalizer(moment);
   const [MeetingOrSlot,setMeetingOrSlot] = useState({});
   const setRef = (ref:MeetingPopUpObject) => {
    setMeetingOrSlot(ref);
-    onOpen();
+   openDrawer();
   };
 
   const handleAddCalendarMeeting=(meeting:CalendarEvent)=>{
     setCalendarEvents(prev=>[...prev,meeting])
   }
+  const { isDrawerOpen, openDrawer, closeDrawer } = useDrawer();
+
   return (
 <>
     <Card extra={"mt-3 !z-5  col-span-2 row-span-2 min-h-96"}>
@@ -82,7 +80,7 @@ function AppBigCalendar() {
     </Card>
 
 
-    <CalendarMeetingModal isOpen={isOpen} onOpen={() => onOpen} onClose={() => onClose()}
+    <CalendarMeetingModal isOpen={isDrawerOpen} onOpen={() => openDrawer} onClose={() => closeDrawer()}
       MeetingOrSlotRef={MeetingOrSlot} setMeetingToCalendar={handleAddCalendarMeeting
        }      />
         </>

@@ -7,8 +7,10 @@ import AppBigCalendar from "./components/calendar/AppBigCalendar";
 import UpcomingList from "./components/upcoming-list/UpcomingList";
 import Card from "components/card";
 import CardButton from "components/button-cards/CardButton";
+import { useDrawer } from "components/drawer/DrawerContext";
 
 const Dashboard = () => {
+  const { openDrawer } = useDrawer();
   return (
     <div>
       {/* Card widget */}
@@ -47,12 +49,12 @@ const Dashboard = () => {
 
       {/* Charts */}
 
-      <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3">
+      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
         <div className="mt-3">
         <CardButton
         extra="transition-colors duration-300 ease-in-out hover:bg-brand-400 cursor-pointer"
             icon={<MdCreate className="h-7 w-7" />}
-            title={"Add Meeting"} onClick={undefined}  
+            title={"Add Meeting"} onClick={()=>openDrawer()}  
             iconInText={<MdKeyboardDoubleArrowRight/>}
             />
         <UpcomingList />

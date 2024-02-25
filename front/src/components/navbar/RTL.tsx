@@ -93,7 +93,7 @@ const Navbar = (props: {
                 </div>
                 <div className="flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm ms-2">
                   <p className="mb-1 text-base font-bold text-gray-900 text-start dark:text-white">
-                    New Update: Horizon UI Dashboard PRO
+                    New Update: LowTabStudio Dashboard PRO
                   </p>
                   <p className="font-base text-xs text-gray-900 text-start dark:text-white">
                     A new update for your downloaded item is available!
@@ -107,7 +107,7 @@ const Navbar = (props: {
                 </div>
                 <div className="flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm ms-2">
                   <p className="mb-1 text-base font-bold text-gray-900 text-start dark:text-white">
-                    New Update: Horizon UI Dashboard PRO
+                    New Update: LowTabStudio Dashboard PRO
                   </p>
                   <p className="font-base text-xs text-gray-900 text-start dark:text-white">
                     A new update for your downloaded item is available!
@@ -140,7 +140,7 @@ const Navbar = (props: {
                 href="https://horizon-ui.com/pro?ref=live-free-tailwind-react"
                 className="px-full linear flex cursor-pointer items-center justify-center rounded-xl bg-brand-500 py-[11px] font-bold text-white transition duration-200 hover:bg-brand-600 hover:text-white active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:bg-brand-200"
               >
-                Buy Horizon UI PRO
+                Buy LowTabStudio PRO
               </a>
               <a
                 target="blank"

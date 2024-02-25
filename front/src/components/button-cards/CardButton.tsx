@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 export type CardButtonProps={
     icon:ReactNode,
     title:string,
-    onClick:void,
+    onClick:any,
     iconInText?:ReactNode,
     extra?: string;
 }

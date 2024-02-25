@@ -14,10 +14,8 @@ function DatePickerApp() {
     moment('2018-01-01T00:00:00.000Z'),
   );
   return (
-    <MUIProviderTheme>
     <MobileDateTimePicker 
     defaultValue={moment('2022-04-17T15:30')} />
-    </MUIProviderTheme>
   );
 }
 

@@ -26,7 +26,7 @@ const Sidebar = (props: {
 
       <div className={`mx-[56px] mt-[50px] flex items-center`}>
         <div className="mt-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 ms-1 dark:text-white">
-          Horizon <span className="font-medium">FREE</span>
+          KTMS
         </div>
       </div>
       <div className="mt-[58px] mb-7 h-px bg-gray-300 dark:bg-white/30" />

@@ -40,7 +40,7 @@ function UpcomingList() {
     <Card extra={"mt-3 !z-5  w-full p-4 "}>
     {/* HistoryCard Header */}
     <div className="flex items-center justify-between rounded-t-3xl p-3">
-      <div className="text-lg font-bold text-navy-700 dark:text-white">
+      <div className="text-xl font-bold text-navy-700 dark:text-white">
         Timeline 
       </div>
       <button className="linear rounded-[20px] bg-lightPrimary px-4 py-2 text-base font-medium text-brand-500 transition duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/20">
