@@ -17,8 +17,21 @@ const MongoConnector = require('./MongoConnector');
 
 async function run() {
   try {
-    await MongoConnector.insertIntoCollection('documents', { a: 1 });
+  
     // You can insert into another collection as needed
+    const chats = await MongoConnector.getChatsByParticipantId('chats', "65dca3490aa1bf5ee4392240");
+    // const messageData = {
+    //     "chatId": "65dca3d20aa1bf5ee4392244",
+    //     "sender": "65dca3490aa1bf5ee4392241",
+    //     "text": "Привет! Нормально, у тебя как?",
+    //     "createdAt": "2024-02-26T14:45:00.305Z"
+    //   };
+    //   await MongoConnector.insertMessage('messages', messageData);
+    const page = 1; // Example page number
+    const limit = 1; // Example limit of documents per page
+    const messages = await MongoConnector.getMessagesByChatId('messages', "65dca3d20aa1bf5ee4392244", page, limit);
+    console.log(JSON.stringify(messages));
+    console.log(chats);
     // await MongoConnector.insertIntoCollection('anotherCollection', { b: 2 });
   } catch (error) {
     console.error('Error running the MongoDB operations:', error);
