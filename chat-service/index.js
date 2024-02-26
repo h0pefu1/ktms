@@ -13,6 +13,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+const MongoConnector = require('./MongoConnector');
+
+async function run() {
+  try {
+    await MongoConnector.insertIntoCollection('documents', { a: 1 });
+    // You can insert into another collection as needed
+    // await MongoConnector.insertIntoCollection('anotherCollection', { b: 2 });
+  } catch (error) {
+    console.error('Error running the MongoDB operations:', error);
+  } finally {
+    await MongoConnector.closeConnection();
+  }
+}
+
+run().catch(console.error);
+
+
 const generateID = () => Math.random().toString(36).substring(2, 10);
 let chatRooms = [];
 
