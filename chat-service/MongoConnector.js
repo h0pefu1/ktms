@@ -5,10 +5,9 @@ class MongoConnector {
     static dbName = 'chatdb';
   
     static async connect() {
-        console.log('Connected successfully to MongoDB server');
-      return this.client.db(this.dbName);
-    }
-  
+    let connectedDb = await this.client.connect();
+      return connectedDb.db('chatdb')
+  }
     static async insertIntoCollection(collectionName, document) {
       try {
         const db = await this.connect();
@@ -43,7 +42,7 @@ class MongoConnector {
         ];
   
         const chats = await collection.aggregate(pipeline).toArray();
-        console.log(JSON.stringify(chats, null, 2));
+        // console.log(JSON.stringify(chats, null, 2));
         return chats;
       } catch (error) {
         console.error('Error fetching chats:', error);

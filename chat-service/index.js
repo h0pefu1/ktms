@@ -11,15 +11,18 @@ const socketIO = require("socket.io")(http, {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+	origin: "http://localhost:3000",
+}
+));
 
 const MongoConnector = require('./MongoConnector');
 
-async function run() {
+async function run(userId) {
   try {
-  
+	console.log(userId);
     // You can insert into another collection as needed
-    const chats = await MongoConnector.getChatsByParticipantId('chats', "65dca3490aa1bf5ee4392240");
+    const chats = await MongoConnector.getChatsByParticipantId('chats', userId);
     // const messageData = {
     //     "chatId": "65dca3d20aa1bf5ee4392244",
     //     "sender": "65dca3490aa1bf5ee4392241",
@@ -28,27 +31,46 @@ async function run() {
     //   };
     //   await MongoConnector.insertMessage('messages', messageData);
     const page = 1; // Example page number
-    const limit = 1; // Example limit of documents per page
-    const messages = await MongoConnector.getMessagesByChatId('messages', "65dca3d20aa1bf5ee4392244", page, limit);
-    console.log(JSON.stringify(messages));
+    const limit = 15; // Example limit of documents per page
+    // const messages = await MongoConnector.getMessagesByChatId('messages', "65dca3d20aa1bf5ee4392244", page, limit);
+    // console.log(JSON.stringify(messages));
     console.log(chats);
+	return chats;
     // await MongoConnector.insertIntoCollection('anotherCollection', { b: 2 });
   } catch (error) {
     console.error('Error running the MongoDB operations:', error);
+	// return null;
   } finally {
     await MongoConnector.closeConnection();
   }
 }
 
-run().catch(console.error);
+// run().catch(console.error);
+app.get("/api/chatsbyuserId/:userId", (req, res) => {
+    const userId = req.params.userId;
+	
+    // Используйте userId для получения чатов пользователя
+   run(userId).then(items=>res.json(items));
+});
 
 
 const generateID = () => Math.random().toString(36).substring(2, 10);
-let chatRooms = [];
+let ConnectedUsersInMoment = [];
+
 
 socketIO.on("connection", (socket) => {
 	console.log(`⚡: ${socket.id} user just connected!`);
-
+    socket.on('userConnected', (user) => {
+		console.log(`⚡: ${socket.id} user just connected!`);
+		ConnectedUsersInMoment.push({ ...user, socketId: socket.id });
+		socketIO.emit('onlineUsers', ConnectedUsersInMoment);
+    });
+  
+    socket.on('disconnect', () => {
+		ConnectedUsersInMoment = ConnectedUsersInMoment.filter(user => user.socketId !== socket.id);
+		socketIO.emit('onlineUsers', ConnectedUsersInMoment);
+    });
+	
 	socket.on("createRoom", (name) => {
 		socket.join(name);
 		chatRooms.unshift({ id: generateID(), name, messages: [] });
@@ -77,10 +99,6 @@ socketIO.on("connection", (socket) => {
 
 		socket.emit("roomsList", chatRooms);
 		socket.emit("foundRoom", result[0].messages);
-	});
-	socket.on("disconnect", () => {
-		socket.disconnect();
-		console.log("🔥: A user disconnected");
 	});
 });
 
