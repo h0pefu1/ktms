@@ -3,10 +3,12 @@ const { MongoClient,ObjectId  } = require('mongodb');
 class MongoConnector {
     static client = new MongoClient('mongodb://localhost:27017');
     static dbName = 'chatdb';
-  
+    static db;
+    static async init() {
+       this.db = await this.client.connect();
+    }
     static async connect() {
-    let connectedDb = await this.client.connect();
-      return connectedDb.db('chatdb')
+      return this.db.db('chatdb')
   }
     static async insertIntoCollection(collectionName, document) {
       try {
@@ -47,6 +49,28 @@ class MongoConnector {
       } catch (error) {
         console.error('Error fetching chats:', error);
       }
+    }
+
+
+    static async insertOrGetUser(user){
+      const db = await this.connect();
+      const collection = db.collection("users");
+      const filter = { key: user.email }; 
+
+      const update = {
+          $setOnInsert: { email: user.email,name:user.person.firstName + user.person.lastName,
+             user_id:user.id
+            },
+      };
+
+      // Options to return the new document and upsert
+      const options = { returnNewDocument: true, upsert: true };
+
+      // Find one document and update it or insert it if it doesn't exist
+      const result = await collection.findOneAndUpdate(filter, update, options);
+      return result;
+      // Output the result
+      console.log(result);
     }
 
     static async getMessagesByChatId(collectionName, chatId, page = 1, limit = 10) {

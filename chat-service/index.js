@@ -17,7 +17,7 @@ app.use(cors({
 ));
 
 const MongoConnector = require('./MongoConnector');
-
+MongoConnector.init();
 async function run(userId) {
   try {
 	console.log(userId);
@@ -41,7 +41,6 @@ async function run(userId) {
     console.error('Error running the MongoDB operations:', error);
 	// return null;
   } finally {
-    await MongoConnector.closeConnection();
   }
 }
 
@@ -53,17 +52,31 @@ app.get("/api/chatsbyuserId/:userId", (req, res) => {
    run(userId).then(items=>res.json(items));
 });
 
-
+async function SetMongoDbUserToUser(user){
+	try {
+		// You can insert into another collection as needed
+		const mongoUser = await MongoConnector.insertOrGetUser(user);
+		
+		console.log(mongoUser);
+		return mongoUser;
+	  } catch (error) {
+		console.error('Error running the MongoDB operations:', error);
+		// return null;
+	  } finally {
+	  }
+}
 const generateID = () => Math.random().toString(36).substring(2, 10);
 let ConnectedUsersInMoment = [];
 
 
-socketIO.on("connection", (socket) => {
+socketIO.on("connection",  (socket) => {
 	console.log(`⚡: ${socket.id} user just connected!`);
-    socket.on('userConnected', (user) => {
+    socket.on('userConnected',  (user) => {
 		console.log(`⚡: ${socket.id} user just connected!`);
-		ConnectedUsersInMoment.push({ ...user, socketId: socket.id });
-		socketIO.emit('onlineUsers', ConnectedUsersInMoment);
+		console.log(user);
+		 SetMongoDbUserToUser(user).then(item=>{socket.emit("chatUser",item)});
+		// socketIO.sockets.socket(socket.id).emit(user);
+	
     });
   
     socket.on('disconnect', () => {
@@ -100,6 +113,14 @@ socketIO.on("connection", (socket) => {
 		socket.emit("roomsList", chatRooms);
 		socket.emit("foundRoom", result[0].messages);
 	});
+	socket.on("join-chat",(data)=>{
+		console.log("chatJoined",data)
+			socket.join(data.chatId);	
+	})
+	socket.on("messageSend",(data)=>{
+		console.log("messagedSender",data);
+		socketIO.to(data.chatId).emit("message",data)
+	})
 });
 
 app.get("/api", (req, res) => {

@@ -9,63 +9,28 @@ import Nft5 from "assets/img/nfts/Nft5.png";
 import Nft6 from "assets/img/nfts/Nft6.png";
 import ChatContext from './context/ChatContext';
 import { $chatApi } from 'http/chatAxios';
+import { Chat } from 'types/types';
 export default function ChatsList() {
-  const {currentChat,selectChat} = useContext(ChatContext);
-  const HistoryData = [
-    {
-      image: Nft1,
-      title: "Colorful Heaven",
-      owner: "Mark Benjamin",
-      price: 0.4,
-      time: "30s",
-    },
-    {
-      image: Nft2,
-      title: "Abstract Colors",
-      owner: "Esthera Jackson",
-      price: 2.4,
-      time: "50m",
-    },
-    {
-      image: Nft3,
-      title: "ETH AI Brain",
-      owner: "Nick Wilson",
-      price: 0.3,
-      time: "20s",
-    },
-    {
-      image: Nft4,
-      title: "Swipe Circles",
-      owner: " Peter Will",
-      price: 0.4,
-      time: "4h",
-    },
-    {
-      image: Nft5,
-      title: "Mesh Gradients",
-      owner: "Will Smith",
-      price: 0.4,
-      time: "30s",
-    },
-    {
-      image: Nft6,
-      title: "3D Cubes Art",
-      owner: " Manny Gates",
-      price: 0.4,
-      time: "2m",
-    },
-  ];
-  const[chats,setChats] = useState([]);
+  const {currentChat,selectChat,chatUser} = useContext(ChatContext);
+  const[chats,setChats] = useState<Chat[]>([]);
+
   useEffect(()=>{
+
     const fetch = async()=>{
-      const response = await $chatApi.get("/chatsbyuserId/65dca3490aa1bf5ee4392240");
+      const response = await $chatApi.get(`/chatsbyuserId/${chatUser._id}`);
       console.log(response);
       if(response != null && response.data != null){
         setChats(response.data);
       }
     }
-    fetch();
-  },[])
+    
+    
+    if(chatUser){
+      fetch();
+    }
+    console.log(chatUser);
+    console.log(chats);
+  },[chatUser])
 
   useEffect(()=>{
     console.log(currentChat)
@@ -75,17 +40,16 @@ export default function ChatsList() {
       {/* HistoryCard Header */}
       <div className="flex items-center justify-between rounded-t-3xl p-5">
         <div className="text-2xl font-bold text-navy-700 dark:text-white">
-          ChatList
+          Chats
         </div>
       </div>
 
-      {/* History CardData */}
-
       {chats.length > 0 && chats.map((data, index) => (
         <div 
-        onClick={()=>selectChat(data._id)}
+        onClick={()=>selectChat(data)}
         style={{
-          backgroundColor:currentChat === data._id ?"#422afb" : ""
+          backgroundColor:currentChat && currentChat._id === data._id ?"#422afb" : "",
+         
         }}
         className="
         transition-colors duration-300 ease-in-out hover:bg-brand-400 cursor-pointer
@@ -99,7 +63,9 @@ export default function ChatsList() {
               /> */}
             </div>
             <div className="flex flex-col">
-              <h5 className="text-base font-bold text-navy-700 dark:text-white">
+              <h5 className= {`text-base font-bold 
+              ${currentChat!= undefined && currentChat._id === data._id ?"text-white" : "text-navy-700"}
+              text-navy-700 dark:text-white`}>
                 {" "}
                 {data.name}
               </h5>

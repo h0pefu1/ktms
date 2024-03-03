@@ -19,11 +19,13 @@ export interface IUser{
     username:string,
     role?:IRole,
     person?: IPerson,
-    isAuth?:boolean
+    isAuth?:boolean,
+    mongoDbParticipantId?:string,
 }
 export type IUserForMeeeting={
     person?:IPerson,
     id?:number,
+
 }
 
 export type Meeting = {
@@ -68,4 +70,9 @@ export type Dashboard={
 export type DropDownItem={
     value:number,
     label:string,
+}
+
+export type Chat={
+    _id:string,
+    name:string,
 }
