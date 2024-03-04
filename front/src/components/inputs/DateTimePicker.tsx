@@ -15,12 +15,8 @@ export type DatePickerType={
 
 function DatePickerApp({value,onChange}:DatePickerType) {
   return (
-    <MUIProviderTheme>
-    <MobileDateTimePicker 
-    value={value}
-    onChange={(e)=>onChange(e)}
-     />
-    </MUIProviderTheme>
+   <>
+   </>
   );
 }
 

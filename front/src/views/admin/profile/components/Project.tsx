@@ -31,7 +31,7 @@ const Project = () => {
               Here is useful information about teams you are  in
         </p>
       </div>
-      <div className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 ">
+      <div className="mt-3 grid grid-cols-1 gap-2">
         {
           teams.length>0 &&
           teams.map(item=>(

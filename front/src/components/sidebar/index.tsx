@@ -3,7 +3,9 @@
 import { HiX } from "react-icons/hi";
 import Links from "./components/Links";
 
+import SidebarCard from "components/sidebar/componentsrtl/SidebarCard";
 import routes from "routes";
+import { MdGroups, MdLaptopMac } from "react-icons/md";
 
 const Sidebar = (props: {
   open: boolean;
@@ -24,8 +26,10 @@ const Sidebar = (props: {
       </span>
 
       <div className={`mx-[56px] mt-[50px] flex items-center`}>
-        <div className="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
-          AMAP <span className="font-medium"> APP</span>
+        <div className="flex items-center justify-center gap-2 mt-1 ml-1 h-3 font-poppins
+         text-[30px] font-bold uppercase text-navy-700 dark:text-white">
+          KTMS 
+          <MdGroups width={5} height={5}/>
         </div>
       </div>
       <div className="mt-[58px] mb-7 h-px bg-gray-300 dark:bg-white/30" />
@@ -36,6 +40,7 @@ const Sidebar = (props: {
       </ul>
 
       {/* Free Horizon Card */}
+     
 
       {/* Nav item end */}
     </div>

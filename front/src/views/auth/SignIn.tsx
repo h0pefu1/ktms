@@ -1,28 +1,31 @@
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
-import { useContext, useState } from "react";
+import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
-import AuthService from "services/AuthService";
-import { v4 as uuid } from 'uuid';
-import { login } from "store/user/userSlice";
 import UserService from "services/UserService";
-
-
- 
+import React from "react";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 export default function SignIn() {
-const {user} = useSelector((state:RootState)=>state);
+
+  const {user} = useSelector((state:RootState)=>state);
   const dispatch = useDispatch();
-  const [userName,setUserName] = useState('');
-    const [userPassword,setUserPasssword] = useState('');
+  const [userName,setUserName] = React.useState('');
+    const [userPassword,setUserPasssword] = React.useState('');
     async function handleEnterLogin(usernm:string,password:string) {
-        UserService.loginUser(dispatch,usernm,password);
+      UserService.loginUser(dispatch,usernm,password);
       console.log(user);
     }
 
+    const [showPassword, setShowPassword] = React.useState(false);
 
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    };
 
 
   return (
@@ -33,37 +36,59 @@ const {user} = useSelector((state:RootState)=>state);
           Sign In
         </h4>
         <p className="mb-9 ml-1 text-base text-gray-600">
-          Enter your login and password to sign in!
+          Enter your email and password to sign in!
         </p>
-      
+        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
+          <div className="rounded-full text-xl">
+            <FcGoogle />
+          </div>
+          <h5 className="text-sm font-medium text-navy-700 dark:text-white">
+            Sign In with Google
+          </h5>
+        </div>
         <div className="mb-6 flex items-center  gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+          <p className="text-base text-gray-600 dark:text-white"> or </p>
+          <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
         </div>
-        {/* Email */}
-        <InputField
-          variant="auth"
-          extra="mb-3"
-          label="Login*"
-          placeholder="Login"
-          id="login"
-          type="text"
+        <div className="flex flex-col gap-4 mb-5">
+          <TextField
+          className="w-full mb-3"
           value = {userName}
-          onchange={(e:any)=>setUserName(e.target.value)}
+          onChange={(e:any)=>setUserName(e.target.value)}
+          label="Email*"
+          placeholder="mail@simmmple.com"
+          id="email"
+          type="text"
         />
 
-        {/* Password */}
-        <InputField
-          variant="auth"
-          extra="mb-3"
-          label="Password*"
-          placeholder="Min. 8 characters"
-          id="password"
-          type="password"
-          value = {userPassword}
-          onchange={(e:any)=>setUserPasssword(e.target.value)}
-        />
+<FormControl 
+className="w-full"
+variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            value={userPassword}
+            onChange={(e:any)=>setUserPasssword(e.target.value)}
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+        </div>
         {/* Checkbox */}
-        {/* <div className="mb-4 flex items-center justify-between px-2">
+        <div className="mb-4 flex items-center justify-between px-2">
           <div className="flex items-center">
             <Checkbox />
             <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
@@ -76,14 +101,13 @@ const {user} = useSelector((state:RootState)=>state);
           >
             Forgot Password?
           </a>
-        </div> */}
+        </div>
         <button
-        onClick={()=>handleEnterLogin(userName,userPassword)}
-         className="linear mt-2 w-full rounded-xl
-          bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+                onClick={()=>handleEnterLogin(userName,userPassword)}
+        className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
           Sign In
         </button>
-        {/* <div className="mt-4">
+        <div className="mt-4">
           <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
             Not registered yet?
           </span>
@@ -93,7 +117,7 @@ const {user} = useSelector((state:RootState)=>state);
           >
             Create an account
           </a>
-        </div> */}
+        </div>
       </div>
     </div>
   );
