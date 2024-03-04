@@ -1,12 +1,14 @@
 import Card from "components/card";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ChatContext from "./context/ChatContext";
-
+import { $chatApi } from "http/chatAxios";
+import InfiniteScroll from "react-infinite-scroll-component";
+import moment from "moment";
 export type HeaderProps = {
   chatName: string;
 };
 
-function Header({ chatName }: HeaderProps) {
+function Header() {
   const { currentChat } = useContext(ChatContext);
   return (
     <div className="flex justify-between border-b-2 border-gray-200 py-3 sm:items-center">
@@ -23,113 +25,53 @@ function Header({ chatName }: HeaderProps) {
     </div>
   );
 }
-function InputArea({handleInput}:any) {
-  const [message,setMessage] = useState("");
-    useEffect(()=>{
-        console.log(message);
+function InputArea({ handleInput }: any) {
+  const [message, setMessage] = useState("");
+  const searchInput = useRef(null);
 
-    },[message])
-  const handleSubmit=()=>{
-    handleInput(message);
-    setMessage("");
-  }
+  const handleSubmit = useCallback(() => {
+    if (message.trim() !== "") {
+      handleInput(message);
+      setMessage("");
+    }
+  }, [message, handleInput]); // handleInput should also be stable, consider wrapping it with useCallback in the parent component
+
+  useEffect(() => {
+    const keyDownHandler = (event:any) => {
+      if (event.key === 'Enter' && document.activeElement === searchInput.current) {
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    // Since the handler is stable, it's safe to add and remove it without causing re-registrations
+    document.addEventListener('keydown', keyDownHandler);
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [handleSubmit]);
+
+
+
+
+
   return (
     <div className="mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0">
       <div className="relative flex">
-        <span className="absolute inset-y-0 flex items-center">
-          <button
-            type="button"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6 text-gray-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-              ></path>
-            </svg>
-          </button>
-        </span>
+     
         <input
-        onChange={(e)=>setMessage(e.target.value)}
-        value={message}
+          name="messageInput"
+          autoFocus
+          ref={searchInput}
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
           type="text"
           placeholder="Write your message!"
           className="w-full rounded-md bg-gray-200 py-3 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
         />
         <div className="absolute inset-y-0 right-0 hidden items-center sm:flex">
           <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6 text-gray-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-              ></path>
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6 text-gray-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-              ></path>
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6 text-gray-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </button>
-          <button
-          onClick={handleSubmit}
+            onClick={handleSubmit}
             type="button"
             className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
           >
@@ -151,31 +93,51 @@ function InputArea({handleInput}:any) {
 
 export type MessageListProps = {
   messages: any[];
+  isLoading: boolean;
+  fetchData: any;
+  hasMore:boolean;
 };
-function MessageList({ messages }: MessageListProps) {
+function MessageList({ messages, fetchData,hasMore }:any) {
   return (
     <div
-      id="messages"
-      className="scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 overflow-y-auto p-3"
-      style={{ maxHeight: "500px" }}
+  id="scrollableDiv"
+  style={{
+    height: 500,
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column-reverse',
+  }}
+>
+    <InfiniteScroll
+    height={500}
+    inverse={true}
+      dataLength={messages.length}
+      style={{ display: "flex", flexDirection: "column-reverse" }}
+      loader={<h4>Loading...</h4>}
+      next={()=>fetchData()}
+      scrollableTarget="scrollableDiv"
+      hasMore={hasMore} 
     >
-      {messages.map((message) => (
-        <Message
-          key={message.id}
-          isOwnMessage={message.isOwnMessage}
-          text={message.text}
+      {messages.map((message:any) => (
+        <>
+        <Message key={message.id} isOwnMessage={message.isOwnMessage} text={message.text} 
+        userName={message.senderDetails.name} timestamp = {message.createdAt}
+        
         />
+        </>
       ))}
+      {/* Пустой div, к которому будет выполнена прокрутка */}
+    </InfiniteScroll>
     </div>
   );
 }
-function Message({ isOwnMessage, text }: any) {
+function Message({ isOwnMessage, text,userName,timestamp }: any) {
   const messageClass = isOwnMessage
     ? "flex items-end justify-end"
     : "flex items-end";
   const messageBubbleClass = isOwnMessage
     ? "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white"
-    : "px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600";
+    : "px-4 py-2 rounded-lg inline-block bg-gray-300 text-navy-700";
 
   return (
     <div className={`${messageClass} gap-2.5`}>
@@ -193,10 +155,10 @@ function Message({ isOwnMessage, text }: any) {
       >
         <div className="flex items-center space-x-2">
           <span className="text-sm font-semibold text-gray-900 dark:text-white">
-            Bonnie Green
+            {userName}
           </span>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            11:46
+           {moment(timestamp).format('HH:mm')}
           </span>
         </div>
         <div className={`${messageBubbleClass}`}>
@@ -280,40 +242,100 @@ function Message({ isOwnMessage, text }: any) {
     </div>
   );
 }
-export default function Chat({socket}:any) {
+export default function Chat({ socket }:any) {
   const [messages, setMessages] = useState([]);
-  const { currentChat,chatUser } = useContext(ChatContext);
-  
-  const handleInput = (text:string)=>{
+  const { currentChat, chatUser } = useContext(ChatContext);
+  const [page, setPage] = useState(1);
+  const limit = 7;
+  const previousChat = useRef(currentChat);
+ 
+  const handleInput = (text:any) => {
     console.log(text);
-      socket.current.emit("messageSend",{chatId:currentChat._id,message:text,userId:chatUser._id})
+    socket.current.emit("messageSend", {
+      chatId: currentChat._id,
+      message: text,
+      userId: chatUser._id,
+    });
+  };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("message", (item:any) => {
+        const message = {
+          sender: item.sender,
+          text: item.text,
+          senderDetails:item.senderDetails,
+          isOwnMessage: item.sender === chatUser._id,
+          chatId: item.chatId,
+          createdAt: item.createdAt,
+        };
+        setMessages((prev) => [message,...prev]);
+      });
+    }
+  }, [socket.current]);
+
+  const [hasMore,setHasMore] = useState(true);
+
+  const handlePageChange = ()=>{
+    console.log("ME,HERE")
+    setPage(prev=>prev+1);
   }
-   useEffect(()=>{
-   },[])
+  useEffect(() => {
+    if (currentChat) {
+      $chatApi.post("/chat/messages", { chatId: currentChat._id, page, limit })
+        .then((response) => {
+          if (response.data != null) {
+            console.log(response.data);
+            if(response.data.length > 0){
+              setHasMore(true);
+            }
+            else{
+              setHasMore(false);
+            }
+            if (previousChat.current !== currentChat) {
+              
+              setMessages([...response.data.map((item:any)=>{
+                return {
+                  sender: item.sender,
+                  text: item.text,
+                  senderDetails:item.senderDetails,
+                  isOwnMessage: item.sender === chatUser._id,
+                  chatId: item.chatId,
+                  createdAt: item.createdAt,
+                }
+              })]);
 
-
-  // useEffect(() => {
-  //     return () => {
-  //       socket.current.disconnect();
-  //     };
-
-  // }, []);
+              setPage(1);
+            } else {
+              setMessages((prevMessages) => [ ...prevMessages,...response.data.map((item:any)=>{
+                return {
+                  sender: item.sender,
+                  senderDetails:item.senderDetails,
+                  text: item.text,
+                  isOwnMessage: item.sender === chatUser._id,
+                  chatId: item.chatId,
+                  createdAt: item.createdAt,
+                }
+              })]);
+            }
+            previousChat.current = currentChat; // Обновляем предыдущий чат
+          }
+        });
+    }
+  }, [currentChat, page]);
 
   return (
-    <Card extra={"w-full h-full mt-3 !z-5 overflow-hidden"}>
+    <Card extra={"w-full  mt-3 !z-5"}>
       {currentChat ? (
-        <div className="p:2 flex h-screen flex-1 flex-col justify-between sm:p-6 ">
-          <Header chatName={"test"} />
-          <MessageList messages={messages} />
-          <InputArea handleInput={handleInput}/>
+           <div className="p-2 flex flex-col">
+          <Header  />
+          <MessageList messages={messages} isLoading={false} fetchData={handlePageChange} hasMore={hasMore}/>
+          <InputArea handleInput={handleInput} />
         </div>
-      )
-    :(
-      <div>
-        Select Chat
-      </div>
-    )
-    }
+      ) : (
+        <div className="h-full flex items-center justify-center font-bold">Select chat to start conversation
+        </div>
+      )}
     </Card>
   );
 }

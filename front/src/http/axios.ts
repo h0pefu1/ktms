@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { AuthResponse } from "types/types";
 
 // export const API_URL = `http://testapi.amap.galex.md/api`
-export const API_URL = `http://localhost:5277/api`
+export const API_URL = `http://192.168.8.206:5277/api`
 export const $api = axios.create({
     withCredentials:true,
     baseURL:API_URL

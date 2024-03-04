@@ -72,31 +72,48 @@ class MongoConnector {
       return result;
       // Output the result
     }
-
     static async getMessagesByChatId(collectionName, chatId, page = 1, limit = 10) {
       try {
         const db = await this.connect();
         const collection = db.collection(collectionName);
-        // Convert string chatId to ObjectId if necessary
+    
         const chatObjectId = typeof chatId === 'string' ? new ObjectId(chatId) : chatId;
-  
-        // Calculate the number of documents to skip
+    
         const skip = (page - 1) * limit;
-  
-        // Fetch paginated and sorted messages
-        const messages = await collection.find({ chatId: chatObjectId })
-          .sort({ createdAt: 1 }) // Use -1 for descending order, 1 for ascending order
-          .skip(skip)
-          .limit(limit)
-          .toArray();
-  
+    
+        const messages = await collection.aggregate([
+          {
+            $match: { chatId: chatObjectId }
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "sender",
+              foreignField: "_id",
+              as: "senderDetails"
+            }
+          },
+          {
+            $unwind: "$senderDetails"
+          },
+          {
+            $sort: { createdAt: -1 }
+          },
+          {
+            $skip: skip
+          },
+          {
+            $limit: limit
+          }
+        ]).toArray();
+    
         console.log('Found messages:', messages);
+        console.log(JSON.stringify(messages, null, 2));
         return messages;
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
     }
-
 
 
     static async insertMessage(collectionName, messageData) {
@@ -113,9 +130,25 @@ class MongoConnector {
           // Преобразование строки в дату, если она представлена строкой
           messageData.createdAt = new Date(messageData.createdAt);
         }
-        const insertResult = await collection.insertOne(messageData);
-        console.log('Message inserted:', insertResult);
-        return insertResult;
+        const result = await collection.insertOne(messageData); // Вставляем запись
+        const insertedId = result.insertedId; // Получаем ID только что вставленной записи
+        const res = await collection.aggregate([
+          {
+            $match: { _id: insertedId }
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "sender",
+              foreignField: "_id",
+              as: "senderDetails"
+            }
+          },
+          {
+            $unwind: "$senderDetails"
+          },
+        ]).toArray(); // Находим запись по ID и подтягиваем данные о отправителе
+        return res[0]; // Возвращаем первый элемент массива, который должен содержать только одно сообщение
       } catch (error) {
         console.error('Error inserting message:', error);
       }

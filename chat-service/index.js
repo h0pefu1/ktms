@@ -5,14 +5,14 @@ const cors = require("cors");
 const PORT = 4000;
 const socketIO = require("socket.io")(http, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: "http://192.168.8.206:3000",
 	},
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-	origin: "http://localhost:3000",
+	origin: "http://192.168.8.206:3000",
 }
 ));
 
@@ -43,13 +43,37 @@ async function run(userId) {
   } finally {
   }
 }
-
+async function getMessageMongo(chatId,page,limit) {
+	try {
+	  
+	  // You can insert into another collection as needed
+	  const messages = await MongoConnector.getMessagesByChatId('messages', chatId,page,limit);
+	  console.log(messages);
+	  return messages;
+	  // await MongoConnector.insertIntoCollection('anotherCollection', { b: 2 });
+	} catch (error) {
+	  console.error('Error running the MongoDB operations:', error);
+	  // return null;
+	} finally {
+	}
+  }
+  
 // run().catch(console.error);
 app.get("/api/chatsbyuserId/:userId", (req, res) => {
     const userId = req.params.userId;
 	
     // Используйте userId для получения чатов пользователя
    run(userId).then(items=>res.json(items));
+});
+
+app.post("/api/chat/messages", (req, res) => {
+	console.log(req);
+    const chatId = req.body.chatId;
+	const page = req.body.page;
+	const limit = req.body.limit;
+	
+    // Используйте userId для получения чатов пользователя
+	getMessageMongo(chatId,page,limit).then(items=>res.json(items));
 });
 
 async function SetMongoDbUserToUser(user){
@@ -119,7 +143,12 @@ socketIO.on("connection",  (socket) => {
 	})
 	socket.on("messageSend",(data)=>{
 		console.log("messagedSender",data);
-		socketIO.to(data.chatId).emit("message",data)
+		MongoConnector.insertMessage("messages",{chatId:data.chatId,sender:data.userId,text:data.message}).then(items=>{
+				console.log("suka",items)
+				console.log(data);
+				socketIO.to(data.chatId).emit("message",items)
+		})
+		
 	})
 });
 

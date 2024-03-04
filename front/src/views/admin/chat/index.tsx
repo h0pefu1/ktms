@@ -15,7 +15,7 @@ import { SocketProvider } from './components/context/SocketConnection'
 
 
 function ChatWrapper(){
-  const ENDPOINT = "http://127.0.0.1:4000";
+  const ENDPOINT = "http://192.168.8.206:4000";
   const {user} = useSelector((state:RootState)=>state);
 const {chatUser,setChatUser,currentChat} = useContext(ChatContext);
 const socketRef = useRef(null)
@@ -25,9 +25,7 @@ const socketRef = useRef(null)
     socketRef.current.on("chatUser",(item:any)=>{
         setChatUser(item);
       })
-      socketRef.current.on("message",(item:any)=>{
-        console.log(item);
-      })
+    
       return () => {
         socketRef.current.disconnect();
       };
@@ -35,7 +33,6 @@ const socketRef = useRef(null)
   },[])
   useEffect(()=>{
     if(chatUser && currentChat){
-
     socketRef.current.emit("join-chat",{userId:chatUser._id,chatId:currentChat._id});
   }
   },[,chatUser,currentChat])
