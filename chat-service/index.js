@@ -5,14 +5,14 @@ const cors = require("cors");
 const PORT = 4000;
 const socketIO = require("socket.io")(http, {
 	cors: {
-		origin: "http://192.168.8.206:3000",
+		origin: "http://192.168.100.26:3000",
 	},
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-	origin: "http://192.168.8.206:3000",
+	origin: "http://192.168.100.26:3000",
 }
 ));
 

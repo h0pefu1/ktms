@@ -11,7 +11,6 @@ const Footer = () => {
           <li>
             <a
               target="blank"
-              href="mailto:hello@simmmple.com"
               className="text-base font-medium text-gray-600 hover:text-gray-600"
             >
               Support
@@ -20,7 +19,6 @@ const Footer = () => {
           <li>
             <a
               target="blank"
-              href="https://simmmple.com/licenses"
               className="text-base font-medium text-gray-600 hover:text-gray-600"
             >
               License
@@ -29,7 +27,6 @@ const Footer = () => {
           <li>
             <a
               target="blank"
-              href="https://simmmple.com/terms-of-service"
               className="text-base font-medium text-gray-600 hover:text-gray-600"
             >
               Terms of Use
@@ -38,7 +35,6 @@ const Footer = () => {
           <li>
             <a
               target="blank"
-              href="https://blog.horizon-ui.com/"
               className="text-base font-medium text-gray-600 hover:text-gray-600"
             >
               Blog

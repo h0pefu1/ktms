@@ -10,6 +10,9 @@ import Nft6 from "assets/img/nfts/Nft6.png";
 import ChatContext from './context/ChatContext';
 import { $chatApi } from 'http/chatAxios';
 import { Chat } from 'types/types';
+import AddChatModal from './modal/AddModal';
+import { IconButton } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 export default function ChatsList() {
   const {currentChat,selectChat,chatUser} = useContext(ChatContext);
   const[chats,setChats] = useState<Chat[]>([]);
@@ -35,13 +38,21 @@ export default function ChatsList() {
   useEffect(()=>{
     console.log(currentChat)
   },[currentChat])
+
+  const [openChatModal,setChatModal] = useState(false);
   return (
+    <>
     <Card extra={"mt-3 !z-5 overflow-hidden p-4"}>
       {/* HistoryCard Header */}
       <div className="flex items-center justify-between rounded-t-3xl p-5">
         <div className="text-2xl font-bold text-navy-700 dark:text-white">
           Chats
         </div>
+        <IconButton 
+          onClick={()=>setChatModal(true)}
+        aria-label="add new chat">
+  <AddCircleOutlineIcon />
+</IconButton>
       </div>
 
       {chats.length > 0 && chats.map((data, index) => (
@@ -78,5 +89,7 @@ export default function ChatsList() {
         </div>
       ))}
     </Card>
+    <AddChatModal open={openChatModal} handleClose={()=>setChatModal(false)}/>
+    </>
   );
 }

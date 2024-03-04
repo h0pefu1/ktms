@@ -339,3 +339,4 @@ export default function Chat({ socket }:any) {
     </Card>
   );
 }
+
