@@ -15,37 +15,21 @@ using Repositories.IRepositories;
 namespace KTMSApi.Controllers
 {
 
-    [Route("api/dashboard")]
+    [Route("api/chat")]
     [Authorize]
-    public class DashboardController : Controller
+    public class ChatController : Controller
     {
 
         private IMeetingRepository _meetingRepository;
 
-        public DashboardController(IMeetingRepository meetingRepository)
+        public ChatController(IMeetingRepository meetingRepository)
         {
             _meetingRepository = meetingRepository;
         }
 
-        [HttpPost("calendarmeeting")]
-        public async Task<ActionResult> CreateMeeting([FromBody] MeetingCreateDTO meetingDTO)
-        {
-            try
-            {
-                var meeting = await _meetingRepository.CreateMeeting(meetingDTO);
-
-                return Ok(meeting);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-
-            }
-        }
-
-
-        [HttpGet("userMeetings")]
-        public async Task<ActionResult> GetRooms()
+  
+        [HttpGet("persons")]
+        public async Task<ActionResult> GetPersons()
         {
             var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
             if(user != null)
@@ -55,28 +39,7 @@ namespace KTMSApi.Controllers
             }
             return NotFound("User not found");
         }
-        [HttpGet("getcalendarmeetings")]
-        public async Task<ActionResult> GetCalendarMeetings()
-        {
-            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
-            if (user != null)
-            {
-
-                return Ok(await _meetingRepository.GetCalendarMeetings(user.Value));
-            }
-            return NotFound("User not found");
-        }
-
-        [HttpGet("getupcomings")]
-        public async Task<ActionResult> GetUpcomingMeetings()
-        {
-            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
-            if (user != null)
-            {
-                return Ok(await _meetingRepository.GetUpcomingDTO(user.Value));
-            }
-            return NotFound("User not found");
-        }
+      
     }
 }
 

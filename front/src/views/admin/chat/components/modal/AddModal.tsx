@@ -14,6 +14,12 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import { $chatApi } from "http/chatAxios";
+import ChatContext from "../context/ChatContext";
+import { useEffect } from "react";
+import UserService from "services/UserService";
+import ChatService from "services/chat";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 export type AddModalProps = {
   open: boolean;
   handleClose: any;
@@ -26,14 +32,15 @@ export default function AddChatModal({ open, handleClose }: AddModalProps) {
     transform: "translate(-50%, -50%)",
     p: 4,
   };
-
+const {chatUser} = React.useContext(ChatContext);
   const [users,setUsers] = React.useState([]);
   React.useEffect(()=>{
         const fetch = async( ) =>{
-                const response = $chatApi.get("chatUsers")
+            
+                const response = await $chatApi.get(`chatUsers/${chatUser._id}`)
         }
 
-  },[]) 
+  },[chatUser]) 
   return (
     <div>
       <Modal
@@ -95,12 +102,26 @@ export default function AddChatModal({ open, handleClose }: AddModalProps) {
 
 
 export  function CheckboxListSecondary() {
-  const [checked, setChecked] = React.useState([1]);
+  const [checked, setChecked] = React.useState([]);
+
+  const [persons,setPersons] = React.useState([]);
+  const {user} = useSelector((state:RootState)=>state);
+    useEffect(()=>{
+        const fetch = async()=>{
+                    const response = await ChatService.getPersons();
+                if(response.data!=undefined){
+                    setPersons(response.data.filter(item => item.value !== user.person.id));
+                }
+                }
+        fetch();
+    },[])
 
   const handleToggle = (value: number) => () => {
+    console.log(value);
     const currentIndex = checked.indexOf(value);
+    console.log(currentIndex);
     const newChecked = [...checked];
-
+    console.log(newChecked);
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
@@ -112,16 +133,19 @@ export  function CheckboxListSecondary() {
 
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+      {
+      persons.length>0 &&
+      persons.map((item) => {
+        
+        const labelId = `checkbox-list-secondary-label-${item.value}`;
         return (
           <ListItem
-            key={value}
+            key={item.value}
             secondaryAction={
               <Checkbox
                 edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
+                onChange={handleToggle(item.value)}
+                checked={checked.indexOf(item.value) !== -1}
                 inputProps={{ 'aria-labelledby': labelId }}
               />
             }
@@ -130,11 +154,11 @@ export  function CheckboxListSecondary() {
             <ListItemButton>
               <ListItemAvatar>
                 <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
+                  alt={`Avatar n°${item.value}`}
+                  src={`/static/images/avatar/${item.value}.jpg`}
                 />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`${item.label}`} />
             </ListItemButton>
           </ListItem>
         );
