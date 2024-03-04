@@ -55,22 +55,22 @@ class MongoConnector {
     static async insertOrGetUser(user){
       const db = await this.connect();
       const collection = db.collection("users");
-      const filter = { key: user.email }; 
+      const filter = { email: user.person.email }; 
 
       const update = {
-          $setOnInsert: { email: user.email,name:user.person.firstName + user.person.lastName,
-             user_id:user.id
+          $setOnInsert: { email: user.person.email, name:user.person.firstName +" " +user.person.lastName,
+             person_id:user.person.id
             },
       };
 
       // Options to return the new document and upsert
-      const options = { returnNewDocument: true, upsert: true };
+      const options = { new: true, upsert: true,returnDocument: "after",returnNewDocument:true };
 
       // Find one document and update it or insert it if it doesn't exist
       const result = await collection.findOneAndUpdate(filter, update, options);
+      console.log(result);
       return result;
       // Output the result
-      console.log(result);
     }
 
     static async getMessagesByChatId(collectionName, chatId, page = 1, limit = 10) {

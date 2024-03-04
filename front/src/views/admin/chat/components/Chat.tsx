@@ -289,16 +289,6 @@ export default function Chat({socket}:any) {
       socket.current.emit("messageSend",{chatId:currentChat._id,message:text,userId:chatUser._id})
   }
    useEffect(()=>{
-    console.log(socket);
-    if(socket.current){
-      socket.current.on("message",(data:any)=>{
-        console.log(data);
-      })
-    }
-   
-      return () => {
-        socket.current.disconnect();
-      };
    },[])
 
 
