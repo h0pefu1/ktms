@@ -2,17 +2,20 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const cors = require("cors");
-const PORT = 4000;
+
+ const FRONT_URL_DEV = `http://192.168.100.26:3000`
+ const FRONT_URL_PROD = "https://reactktms.galex.md/api"
+const PORT = process.env.PORT || 3001;
 const socketIO = require("socket.io")(http, {
 	cors: {
-		origin: "http://192.168.100.26:3000",
+		origin: FRONT_URL_PROD,
 	},
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-	origin: "http://192.168.100.26:3000",
+	origin: FRONT_URL_PROD,
 }
 ));
 
@@ -57,16 +60,33 @@ async function getMessageMongo(chatId,page,limit) {
 	} finally {
 	}
   }
-  
+
+async function createNewChat(chatName,persons){
+	try {
+	  
+		// You can insert into another collection as needed
+		const chat = await MongoConnector.insertNewChat(chatName, persons);
+		console.log(chat);
+		return chat;
+		// await MongoConnector.insertIntoCollection('anotherCollection', { b: 2 });
+	  } catch (error) {
+		console.error('Error running the MongoDB operations:', error);
+		// return null;
+	  } finally {
+	  }
+}
+
 // run().catch(console.error);
-app.get("/api/chatsbyuserId/:userId", (req, res) => {
+app.get("/chatsbyuserId/:userId", (req, res) => {
     const userId = req.params.userId;
 	
     // Используйте userId для получения чатов пользователя
    run(userId).then(items=>res.json(items));
 });
 
-app.post("/api/chat/messages", (req, res) => {
+
+
+app.post("/chat/messages", (req, res) => {
 	console.log(req);
     const chatId = req.body.chatId;
 	const page = req.body.page;
@@ -75,6 +95,15 @@ app.post("/api/chat/messages", (req, res) => {
     // Используйте userId для получения чатов пользователя
 	getMessageMongo(chatId,page,limit).then(items=>res.json(items));
 });
+app.post("/chat/create", (req, res) => {
+	console.log(req);
+    const chatName = req.body.chatName;
+	const persons = req.body.persons;
+	
+    // Используйте userId для получения чатов пользователя
+	createNewChat(chatName,persons).then(items=>res.json(items));
+});
+
 
 async function SetMongoDbUserToUser(user){
 	try {

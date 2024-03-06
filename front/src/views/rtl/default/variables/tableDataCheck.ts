@@ -7,13 +7,13 @@ type RowObj = {
 
 const tableDataCheck: RowObj[] = [
 	{
-		name: [ 'LowTabStudio PRO', true ],
+		name: [ ' PRO', true ],
 		quantity: 2458,
 		progress: '17.5%',
 		date: '12 Jan 2021',
 	},
 	{
-		name: [ 'LowTabStudio Free', true ],
+		name: [ ' Free', true ],
 		quantity: 1485,
 		progress: '10.8%',
 		date: '21 Feb 2021',

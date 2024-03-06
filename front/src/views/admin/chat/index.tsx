@@ -15,7 +15,7 @@ import { SocketProvider } from './components/context/SocketConnection'
 
 
 function ChatWrapper(){
-  const ENDPOINT = "http://192.168.100.26:4000";
+  const ENDPOINT = "https://reactktmsnode.galex.md";
   const {user} = useSelector((state:RootState)=>state);
 const {chatUser,setChatUser,currentChat} = useContext(ChatContext);
 const socketRef = useRef(null)

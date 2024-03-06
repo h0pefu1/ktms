@@ -4,6 +4,7 @@ import ChatContext from "./context/ChatContext";
 import { $chatApi } from "http/chatAxios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import moment from "moment";
+import { Input } from "@mui/material";
 export type HeaderProps = {
   chatName: string;
 };
@@ -35,21 +36,21 @@ function InputArea({ handleInput }: any) {
       setMessage("");
     }
   }, [message, handleInput]); // handleInput should also be stable, consider wrapping it with useCallback in the parent component
+  const keyDownHandler = (event:any) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+  // useEffect(() => {
+    
 
-  useEffect(() => {
-    const keyDownHandler = (event:any) => {
-      if (event.key === 'Enter' && document.activeElement === searchInput.current) {
-        event.preventDefault();
-        handleSubmit();
-      }
-    };
-
-    // Since the handler is stable, it's safe to add and remove it without causing re-registrations
-    document.addEventListener('keydown', keyDownHandler);
-    return () => {
-      document.removeEventListener('keydown', keyDownHandler);
-    };
-  }, [handleSubmit]);
+  //   // Since the handler is stable, it's safe to add and remove it without causing re-registrations
+  //   document.addEventListener('keydown', keyDownHandler);
+  //   return () => {
+  //     document.removeEventListener('keydown', keyDownHandler);
+  //   };
+  // }, [handleSubmit]);
 
 
 
@@ -59,17 +60,22 @@ function InputArea({ handleInput }: any) {
     <div className="mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0">
       <div className="relative flex">
      
-        <input
+        <Input
+          multiline
           name="messageInput"
           autoFocus
+          onKeyDown={keyDownHandler}
           ref={searchInput}
           onChange={(e) => setMessage(e.target.value)}
           value={message}
+          sx={{
+            padding:1
+          }}
           type="text"
           placeholder="Write your message!"
-          className="w-full rounded-md bg-gray-200 py-3 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
+          className="w-full rounded-md  py-5 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
         />
-        <div className="absolute inset-y-0 right-0 hidden items-center sm:flex">
+        <div className="">
           <button
             onClick={handleSubmit}
             type="button"
@@ -102,7 +108,7 @@ function MessageList({ messages, fetchData,hasMore }:any) {
     <div
   id="scrollableDiv"
   style={{
-    height: 500,
+    maxHeight: "45rem",
     overflow: 'auto',
     display: 'flex',
     flexDirection: 'column-reverse',
@@ -318,16 +324,20 @@ export default function Chat({ socket }:any) {
                 }
               })]);
             }
-            previousChat.current = currentChat; // Обновляем предыдущий чат
+            previousChat.current = currentChat; 
           }
         });
     }
   }, [currentChat, page]);
 
   return (
-    <Card extra={"w-full  mt-3 !z-5"}>
+    <Card extra={"w-full  mt-3 !z-5"}
+    
+    >
       {currentChat ? (
-           <div className="p-2 flex flex-col">
+           <div className="p-2 flex flex-col" style={{
+            
+           }}>
           <Header  />
           <MessageList messages={messages} isLoading={false} fetchData={handlePageChange} hasMore={hasMore}/>
           <InputArea handleInput={handleInput} />

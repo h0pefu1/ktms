@@ -1,14 +1,14 @@
 const { MongoClient,ObjectId  } = require('mongodb');
 
 class MongoConnector {
-    static client = new MongoClient('mongodb://localhost:27017');
-    static dbName = 'chatdb';
+    static client = new MongoClient('mongodb://192.168.200.101:27017/');
+    static dbName = 'KTMSChatDb';
     static db;
     static async init() {
        this.db = await this.client.connect();
     }
     static async connect() {
-      return this.db.db('chatdb')
+      return this.db.db('KTMSChatDb')
   }
     static async insertIntoCollection(collectionName, document) {
       try {
@@ -26,19 +26,53 @@ class MongoConnector {
       try {
         const db = await this.connect();
         const collection = db.collection(collectionName);
-        // Query to find chats with the participantId in the participants array
+y
         const pipeline = [
           {
             $match: {
-              participants: { $in: [new ObjectId(participantId)] } // Фильтрация чатов по участнику
+              participants: { $in: [new ObjectId(participantId)] } // Filtering chats by participant
             }
           },
           {
             $lookup: {
-              from: 'users', // Название коллекции, с которой нужно выполнить "join"
-              localField: 'participants', // Поле в текущей коллекции
-              foreignField: '_id', // Поле в коллекции, с которой делаем "join"
-              as: 'participantDetails' // Название нового поля, в котором будут храниться данные об участниках
+              from: 'users',
+              localField: 'participants',
+              foreignField: '_id',
+              as: 'participantDetails'
+            }
+          },
+          {
+            $lookup: {
+              from: 'messages',
+              let: { chatId: '$_id' },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: { $eq: ['$chatId', '$$chatId'] } // Match messages where the chatId equals the chat's _id
+                  }
+                },
+                { $sort: { createdAt: -1 } },
+                { $limit: 1 },
+                {
+                  $lookup: {
+                    from: 'users', 
+                    localField: 'sender',
+                    foreignField: '_id',
+                    as: 'senderDetails'
+                  }
+                },
+                {
+                  $project: {
+                    _id: 1,
+                    chatId: 1,
+                    sender: 1,
+                    text: 1,
+                    createdAt: 1,
+                    username: { $arrayElemAt: ["$senderDetails.name", 0] } // Flatten to get the userName of the sender
+                  }
+                }
+              ],
+              as: 'lastMessage'
             }
           }
         ];
@@ -51,6 +85,38 @@ class MongoConnector {
       }
     }
 
+
+    static async insertNewChat(chatName,persons){
+      try {
+        const db = await this.connect();
+        const collection = db.collection("chats");
+        // Query to find chats with the participantId in the participants array
+        console.log(persons)
+      const pipeline = [
+        {
+          $match: {
+            person_id: { $in: persons } // Фильтрация чатов по участнику
+          }
+        },
+      ];
+
+      const chatPersons = await db.collection("users").aggregate(pipeline).toArray();
+     if(chatName === ""){
+        chatName = chatPersons.map(item=>item.name).split(",");
+     }
+      const chat =  { name:chatName,
+        participants:chatPersons.map(item=>new ObjectId(item._id)),
+        createdAt:new Date()
+        }
+      const result = await collection.insertOne(chat);
+        console.log("inserted",result);
+        const search = await collection.findOne({_id:result.insertedId})
+        console.log(search);
+        return search;
+      } catch (error) {
+        console.error('Error fetching chats:', error);
+      }
+    }
 
     static async insertOrGetUser(user){
       const db = await this.connect();
@@ -120,14 +186,11 @@ class MongoConnector {
       try {
         const db = await this.connect();
         const collection = db.collection(collectionName);
-        // Преобразование chatId и sender в ObjectId
         messageData.chatId = new ObjectId(messageData.chatId);
         messageData.sender = new ObjectId(messageData.sender);
-        // Добавление поля createdAt, если его нет
         if (!messageData.createdAt) {
           messageData.createdAt = new Date();
         } else {
-          // Преобразование строки в дату, если она представлена строкой
           messageData.createdAt = new Date(messageData.createdAt);
         }
         const result = await collection.insertOne(messageData); // Вставляем запись

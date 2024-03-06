@@ -11,6 +11,9 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
+import UserService from "services/UserService";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
@@ -19,7 +22,11 @@ const Navbar = (props: {
 }) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
-
+  const dispatch = useDispatch();
+  const user = useSelector((state:RootState)=>state.user);
+  const handleLogOut = async ()=>{
+      await UserService.logoutUser(dispatch);
+  }
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
@@ -133,13 +140,7 @@ const Navbar = (props: {
               >
                 See Documentation
               </a>
-              <a
-                target="blank"
-                href="https://horizon-ui.com/?ref=live-free-tailwind-react"
-                className="hover:bg-black px-full linear flex cursor-pointer items-center justify-center rounded-xl py-[11px] font-bold text-navy-700 transition duration-200 hover:text-navy-700 dark:text-white dark:hover:text-white"
-              >
-                Try Horizon Free
-              </a>
+            
             </div>
           }
           classNames={"py-2 top-6 -left-[250px] md:-left-[330px] w-max"}
@@ -177,7 +178,7 @@ const Navbar = (props: {
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 Hey, {user.person.firstName}
                   </p>{" "}
                 </div>
               </div>
@@ -197,6 +198,7 @@ const Navbar = (props: {
                   Newsletter Settings
                 </a>
                 <a
+                onClick={handleLogOut}
                   href=" "
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
                 >

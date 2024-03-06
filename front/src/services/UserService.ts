@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { checkAuth, login, logout } from "store/user/userSlice";
 import { AuthResponse } from "types/types";
 import axios from "axios";
-import { API_URL } from "http/axios";
+import { REACT_API_LINK_PROD } from "http/axios";
 
 
 export default class UserService{
@@ -36,7 +36,7 @@ export default class UserService{
     static async checkAuthUser(dispatch:any){
         try{
             console.log("check")
-                    const response = await axios.get<AuthResponse>(`${API_URL}/Token/refresh`,{withCredentials:true})
+                    const response = await axios.get<AuthResponse>(`${REACT_API_LINK_PROD}/Token/refresh`,{withCredentials:true})
                     console.log(response)
                     localStorage.setItem('token', response.data.accessToken);
                     console.log("Refresh")

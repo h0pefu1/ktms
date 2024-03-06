@@ -11,11 +11,11 @@ import ChatContext from './context/ChatContext';
 import { $chatApi } from 'http/chatAxios';
 import { Chat } from 'types/types';
 import AddChatModal from './modal/AddModal';
-import { IconButton } from '@mui/material';
+import { CircularProgress, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 export default function ChatsList() {
   const {currentChat,selectChat,chatUser} = useContext(ChatContext);
-  const[chats,setChats] = useState<Chat[]>([]);
+  const[chats,setChats] = useState<any[]>([]);
 
   useEffect(()=>{
 
@@ -54,8 +54,10 @@ export default function ChatsList() {
   <AddCircleOutlineIcon />
 </IconButton>
       </div>
-
-      {chats.length > 0 && chats.map((data, index) => (
+      <div className="overflow-auto" style={{
+        maxHeight:"45rem"
+      }}>
+      {chats.length > 0 ? chats.map((data, index) => (
         <div 
         onClick={()=>selectChat(data)}
         style={{
@@ -82,12 +84,27 @@ export default function ChatsList() {
               </h5>
               <p className="mt-1 text-sm font-normal text-gray-600">
                 {" "}
-                Last Message from someone...
+                {
+                  data !=undefined && data.lastMessage.length > 0 ?
+                  <>
+                  <span className='font-bold text-navy-700'>{data.lastMessage[0].username}:</span> {data.lastMessage[0].text}
+                  </>
+                  :
+                  <>
+                  No messages
+                  </>
+                }
+              
               </p>
             </div>
           </div>
         </div>
-      ))}
+      ))
+    :<div className="items-center flex justify-center">
+    <CircularProgress/>
+    </div>
+    }
+      </div>
     </Card>
     <AddChatModal open={openChatModal} handleClose={()=>setChatModal(false)}/>
     </>
