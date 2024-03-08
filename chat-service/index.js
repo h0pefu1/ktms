@@ -4,7 +4,7 @@ const http = require("http").Server(app);
 const cors = require("cors");
 
  const FRONT_URL_DEV = `http://192.168.100.26:3000`
- const FRONT_URL_PROD = "https://reactktms.galex.md/api"
+ const FRONT_URL_PROD = "https://reactktms.galex.md"
 const PORT = process.env.PORT || 3001;
 const socketIO = require("socket.io")(http, {
 	cors: {

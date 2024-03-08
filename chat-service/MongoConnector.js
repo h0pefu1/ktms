@@ -26,7 +26,7 @@ class MongoConnector {
       try {
         const db = await this.connect();
         const collection = db.collection(collectionName);
-y
+
         const pipeline = [
           {
             $match: {

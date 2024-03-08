@@ -8,6 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { Provider } from "react-redux";
 import { store } from "store/store";
+import { SnackbarProvider } from "components/snackbar-context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
   shape: {
@@ -30,7 +31,9 @@ root.render(
    <Provider store={store}>
   <ThemeProvider theme={theme}>
   <LocalizationProvider dateAdapter={AdapterMoment}>
+    <SnackbarProvider>
     <App />
+    </SnackbarProvider>
     </LocalizationProvider>
     </ThemeProvider>
     </Provider>

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { AuthResponse } from "types/types";
 
-// export const API_URL = `http://testapi.amap.galex.md/api`
+export const API_URL = `http://testapi.amap.galex.md/api`
 export const API_URL_DEV = `http://192.168.100.26:5277/api`
 export const CHAT_SERVICE_URL_DEV = `http://192.168.100.26:4000/api`
 export const REACT_API_LINK_PROD = "https://reactktmsapi.galex.md/api"

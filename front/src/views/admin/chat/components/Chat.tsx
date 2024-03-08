@@ -141,10 +141,11 @@ function Message({ isOwnMessage, text,userName,timestamp }: any) {
   const messageClass = isOwnMessage
     ? "flex items-end justify-end"
     : "flex items-end";
-  const messageBubbleClass = isOwnMessage
-    ? "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white"
-    : "px-4 py-2 rounded-lg inline-block bg-gray-300 text-navy-700";
+    const messageBubbleClass = isOwnMessage
+    ? "px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white break-words"
+    : "px-4 py-2 rounded-lg inline-block bg-gray-300 text-navy-700 break-words";
 
+ 
   return (
     <div className={`${messageClass} gap-2.5`}>
       {!isOwnMessage && (
@@ -154,7 +155,7 @@ function Message({ isOwnMessage, text,userName,timestamp }: any) {
           alt="Profile"
         />
       )}
-      <div
+       <div
         className={`flex w-full max-w-[320px] flex-col gap-1 ${
           isOwnMessage ? "items-end" : ""
         }`}
