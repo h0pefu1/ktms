@@ -9,5 +9,8 @@ namespace DTO.User
     public class TeamDTO:BaseDTO
     {
         public string Name { get; set; }
+
+        public List<PersonDTO>? Persons { get; set; }
     }
+
 }
