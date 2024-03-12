@@ -8,4 +8,8 @@ export default class ProfileService{
     static async getUserAdditional():Promise<AxiosResponse<UserAdditional>>{
         return  $api.get('/profile/useradditional');
     }
+    static async editUserAdditional(userdata: any):Promise<AxiosResponse<UserAdditional>>{
+        console.log(userdata);
+        return  $api.post('/profile/edit', userdata);
+    }
 }

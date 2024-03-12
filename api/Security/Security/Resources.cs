@@ -11,6 +11,7 @@ namespace Infrastructure.Security
     public sealed record UserResource(int Id, string Username,Person Person,Role Role);
     public sealed record RegisterResource(string Username, string Password, 
         Person Person,Role Role);
+    public sealed record EditProfile(int Id, string email, string phoneNumber, DateTime birthDay);
 
     public class AuthenticatedResponse
     {

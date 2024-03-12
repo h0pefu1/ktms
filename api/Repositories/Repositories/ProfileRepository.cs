@@ -1,10 +1,10 @@
 ﻿using System;
-
+using Domain.Entities;
 using DTO;
 using DTO.User;
-
+using Infrastructure.Security;
 using KTMS.Infrastructure.DataBase;
-
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Repositories.IRepositories;
 
@@ -46,6 +46,7 @@ namespace Repositories.Repositories
             if (user != null)
             {
                 var person = await _dbContext.Persons.FirstOrDefaultAsync(u => u.Id == user.Person.Id);
+                profileAdditional.Id = person.Id;
                 profileAdditional.FirstName = person.FirstName;
                 profileAdditional.LastName= person.LastName;
                 profileAdditional.BirthDay = person.BirthDay;
@@ -53,6 +54,20 @@ namespace Repositories.Repositories
                 profileAdditional.About = person.About;
                 profileAdditional.Email= person.Email;
                 return profileAdditional;
+            }
+            return null;
+        }
+
+        public async Task<Person> UpdateUserProfile(EditProfile editProfile)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == editProfile.Id);
+            if(user != null) 
+            {
+                var profile = await _dbContext.Persons.FirstOrDefaultAsync(u => u.Id == editProfile.Id);
+                profile.Email = editProfile.email;
+                profile.PhoneNumber = editProfile.phoneNumber;
+                await _dbContext.SaveChangesAsync();
+                return profile;
             }
             return null;
         }
