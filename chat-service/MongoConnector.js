@@ -1,7 +1,7 @@
 const { MongoClient,ObjectId  } = require('mongodb');
 
 class MongoConnector {
-    static client = new MongoClient('mongodb://192.168.200.101:27017/');
+    static client = new MongoClient('mongodb://localhost:27017/');
     static dbName = 'KTMSChatDb';
     static db;
     static async init() {

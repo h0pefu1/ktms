@@ -5,6 +5,7 @@ import { $chatApi } from "http/chatAxios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import moment from "moment";
 import { Input } from "@mui/material";
+import { useSocket } from "./context/SocketConnection";
 export type HeaderProps = {
   chatName: string;
 };
@@ -249,16 +250,16 @@ function Message({ isOwnMessage, text,userName,timestamp }: any) {
     </div>
   );
 }
-export default function Chat({ socket }:any) {
+export default function Chat({ socket1 }:any) {
   const [messages, setMessages] = useState([]);
   const { currentChat, chatUser } = useContext(ChatContext);
   const [page, setPage] = useState(1);
   const limit = 7;
   const previousChat = useRef(currentChat);
- 
+ const {socket} = useSocket();
   const handleInput = (text:any) => {
     console.log(text);
-    socket.current.emit("messageSend", {
+    socket.emit("messageSend", {
       chatId: currentChat._id,
       message: text,
       userId: chatUser._id,
@@ -266,8 +267,9 @@ export default function Chat({ socket }:any) {
   };
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("message", (item:any) => {
+    if (socket && chatUser) {
+      socket.on("message", (item:any) => {
+        console.log(chatUser);
         const message = {
           sender: item.sender,
           text: item.text,
@@ -279,7 +281,7 @@ export default function Chat({ socket }:any) {
         setMessages((prev) => [message,...prev]);
       });
     }
-  }, [socket.current]);
+  }, [socket,chatUser]);
 
   const [hasMore,setHasMore] = useState(true);
 

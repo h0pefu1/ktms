@@ -9,6 +9,7 @@ import UserService from "services/UserService";
 import { useDispatch } from "react-redux";
 import { Snackbar } from "@mui/material";
 import { SnackbarProvider } from "components/snackbar-context";
+import { SocketProvider } from "views/admin/chat/components/context/SocketConnection";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -20,7 +21,9 @@ const App = () => {
       <Route path="auth/*" element={<AuthLayout />} />
       <Route path="admin/*" element={
         <DrawerProvider>
+          <SocketProvider>
       <AdminLayout />
+      </SocketProvider>
       </DrawerProvider>
       } />
       <Route path="rtl/*" element={<RtlLayout />} />

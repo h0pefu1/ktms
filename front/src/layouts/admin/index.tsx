@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "components/navbar";
 import Sidebar from "components/sidebar";
@@ -6,6 +6,7 @@ import Footer from "components/footer/Footer";
 import routes from "routes";
 import { RootState } from "store/store";
 import { useSelector } from "react-redux";
+import { useSocket } from "views/admin/chat/components/context/SocketConnection";
 
 export default function Admin(props: { [x: string]: any }) {
   const user = useSelector((state:RootState)=>state.user);
@@ -58,11 +59,20 @@ export default function Admin(props: { [x: string]: any }) {
       }
     });
   };
+  const {socket,connectSocket} = useSocket();
+  useEffect(()=>{
+    if(user.isAuth){
+      connectSocket();
+    }
+    console.log(socket)
 
+  },[user,socket])
   document.documentElement.dir = "ltr";
   if(!user.isAuth){
     return <Navigate to='/auth' replace/>
   }
+  
+ 
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />

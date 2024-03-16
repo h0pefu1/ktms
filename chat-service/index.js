@@ -4,7 +4,7 @@ const http = require("http").Server(app);
 const cors = require("cors");
 
  const FRONT_URL_DEV = `http://192.168.100.26:3000`
- const FRONT_URL_PROD = "https://reactktms.galex.md"
+ const FRONT_URL_PROD = "http://localhost:3000"
 const PORT = process.env.PORT || 3001;
 const socketIO = require("socket.io")(http, {
 	cors: {
@@ -174,6 +174,7 @@ socketIO.on("connection",  (socket) => {
 		console.log("messagedSender",data);
 		MongoConnector.insertMessage("messages",{chatId:data.chatId,sender:data.userId,text:data.message}).then(items=>{
 				console.log("suka",items)
+				console.log(socket.room);
 				console.log(data);
 				socketIO.to(data.chatId).emit("message",items)
 		})
