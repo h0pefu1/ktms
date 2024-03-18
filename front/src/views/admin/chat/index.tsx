@@ -27,9 +27,10 @@ const socketRef = useRef(null)
         setChatUser(item);
       })
     
-      return () => {
-        socket.disconnect();
-      };
+    
+      // return () => {
+      //   socket.disconnect();
+      // };
 
   },[socket])
   useEffect(()=>{

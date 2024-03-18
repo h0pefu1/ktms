@@ -193,25 +193,50 @@ class MongoConnector {
         } else {
           messageData.createdAt = new Date(messageData.createdAt);
         }
-        const result = await collection.insertOne(messageData); // Вставляем запись
-        const insertedId = result.insertedId; // Получаем ID только что вставленной записи
-        const res = await collection.aggregate([
-          {
-            $match: { _id: insertedId }
-          },
-          {
-            $lookup: {
-              from: "users",
-              localField: "sender",
-              foreignField: "_id",
-              as: "senderDetails"
-            }
-          },
-          {
-            $unwind: "$senderDetails"
-          },
-        ]).toArray(); // Находим запись по ID и подтягиваем данные о отправителе
-        return res[0]; // Возвращаем первый элемент массива, который должен содержать только одно сообщение
+        const result = await collection.insertOne(messageData); 
+        const insertedId = result.insertedId;
+           
+    const res = await collection.aggregate([
+      {
+        $match: { _id: insertedId }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "sender",
+          foreignField: "_id",
+          as: "senderDetails"
+        }
+      },
+      {
+        $unwind: "$senderDetails"
+      },
+      {
+        $lookup: {
+          from: "chats",
+          let: { chatId: "$chatId" },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$_id", "$$chatId"] } } },
+            { $project: { participants: 1 } }
+          ],
+          as: "chatDetails"
+        }
+      },
+      {
+        $unwind: "$chatDetails"
+      },
+      {
+        $addFields: {
+          participants: "$chatDetails.participants"
+        }
+      },
+      {
+        $project: {
+          chatDetails: 0 
+        }
+      }
+    ]).toArray();
+        return res; // Возвращаем первый элемент массива, который должен содержать только одно сообщение
       } catch (error) {
         console.error('Error inserting message:', error);
       }

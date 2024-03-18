@@ -21,7 +21,9 @@ import {
 } from "react-icons/md";
 import ChatPage from "views/admin/chat";
 import { Badge } from "@mui/material";
-
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
+import ChatBadgeIcon from "components/badges/ChatBadgeIcon";
 const routes = [
   {
     name: "Main Dashboard",
@@ -49,9 +51,7 @@ const routes = [
     name: "Chats",
     layout: "/admin",
     icon: 
-    <Badge badgeContent={4} color="primary">
-    <MdMessage className="h-6 w-6" />
-    </Badge>,
+   <ChatBadgeIcon/>,
     path: "chats",
     component: <ChatPage />,
   },

@@ -5,8 +5,9 @@ import Sidebar from "components/sidebar";
 import Footer from "components/footer/Footer";
 import routes from "routes";
 import { RootState } from "store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "views/admin/chat/components/context/SocketConnection";
+import { IncrementChatBadges } from "store/notification/notifcationBadgesSlice";
 
 export default function Admin(props: { [x: string]: any }) {
   const user = useSelector((state:RootState)=>state.user);
@@ -60,9 +61,13 @@ export default function Admin(props: { [x: string]: any }) {
     });
   };
   const {socket,connectSocket} = useSocket();
+  const dispatch = useDispatch();
   useEffect(()=>{
     if(user.isAuth){
       connectSocket();
+      if(socket){
+      
+      }
     }
     console.log(socket)
 

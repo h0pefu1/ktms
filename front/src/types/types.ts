@@ -76,3 +76,9 @@ export type Chat={
     _id:string,
     name:string,
 }
+
+
+export type NotificationBadges={
+    chatBadgeCount?:number,    
+    notificationBadgeCount?:number,
+}   

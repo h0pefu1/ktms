@@ -6,6 +6,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import moment from "moment";
 import { Input } from "@mui/material";
 import { useSocket } from "./context/SocketConnection";
+import { IncrementChatBadges } from "store/notification/notifcationBadgesSlice";
+import { useDispatch } from "react-redux";
 export type HeaderProps = {
   chatName: string;
 };
@@ -97,7 +99,6 @@ function InputArea({ handleInput }: any) {
     </div>
   );
 }
-
 export type MessageListProps = {
   messages: any[];
   isLoading: boolean;
@@ -105,6 +106,9 @@ export type MessageListProps = {
   hasMore:boolean;
 };
 function MessageList({ messages, fetchData,hasMore }:any) {
+  useEffect(()=>{
+    console.log(messages);
+  },[messages])
   return (
     <div
   id="scrollableDiv"
@@ -128,7 +132,7 @@ function MessageList({ messages, fetchData,hasMore }:any) {
       {messages.map((message:any) => (
         <>
         <Message key={message.id} isOwnMessage={message.isOwnMessage} text={message.text} 
-        userName={message.senderDetails.name} timestamp = {message.createdAt}
+        userName={message.senderDetails} timestamp = {message.createdAt}
         
         />
         </>
@@ -163,7 +167,7 @@ function Message({ isOwnMessage, text,userName,timestamp }: any) {
       >
         <div className="flex items-center space-x-2">
           <span className="text-sm font-semibold text-gray-900 dark:text-white">
-            {userName}
+            {userName != undefined ? userName.name : ""}
           </span>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
            {moment(timestamp).format('HH:mm')}
@@ -251,6 +255,8 @@ function Message({ isOwnMessage, text,userName,timestamp }: any) {
   );
 }
 export default function Chat({ socket1 }:any) {
+
+  const dispatch = useDispatch();
   const [messages, setMessages] = useState([]);
   const { currentChat, chatUser } = useContext(ChatContext);
   const [page, setPage] = useState(1);
@@ -265,18 +271,24 @@ export default function Chat({ socket1 }:any) {
       userId: chatUser._id,
     });
   };
-
+  
   useEffect(() => {
     if (socket && chatUser) {
+      socket.on("new_message",(notification:any)=>{
+        dispatch(IncrementChatBadges())
+        console.log(1);
+      })
       socket.on("message", (item:any) => {
+        
         console.log(chatUser);
+        console.log(item);
         const message = {
-          sender: item.sender,
-          text: item.text,
-          senderDetails:item.senderDetails,
-          isOwnMessage: item.sender === chatUser._id,
-          chatId: item.chatId,
-          createdAt: item.createdAt,
+          sender: item[0].sender,
+          text: item[0].text,
+          senderDetails:item[0].senderDetails,
+          isOwnMessage: item[0].sender === chatUser._id,
+          chatId: item[0].chatId,
+          createdAt: item[0].createdAt,
         };
         setMessages((prev) => [message,...prev]);
       });
