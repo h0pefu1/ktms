@@ -6,6 +6,7 @@ import Links from "./components/Links";
 import SidebarCard from "components/sidebar/componentsrtl/SidebarCard";
 import routes from "routes";
 import { MdGroups, MdLaptopMac } from "react-icons/md";
+import OnlineUsers from "./components/onlineusers/OnlineUsers";
 
 const Sidebar = (props: {
   open: boolean;
@@ -37,10 +38,10 @@ const Sidebar = (props: {
 
       <ul className="mb-auto pt-1">
         <Links routes={routes} />
+        <OnlineUsers/>
       </ul>
 
       {/* Free Horizon Card */}
-     
 
       {/* Nav item end */}
     </div>

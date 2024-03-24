@@ -17,7 +17,7 @@ export const SocketProvider = ({children}: SocketProviderProps) => {
 
   const connectSocket = () => {
     if(!socket) {
-      const newSocket: Socket = io("http://localhost:3001")
+      const newSocket: Socket = io("http://localhost:3001",{reconnectionAttempts:4})
       setSocket(newSocket)
       return
     }
